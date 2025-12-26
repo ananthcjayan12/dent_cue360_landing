@@ -21,12 +21,13 @@ const Features: React.FC = () => {
                     {/* Card 1: Visual Dental Charting (Span 2) */}
                     <div className="md:col-span-2 group relative overflow-hidden rounded-[2.5rem] bg-slate-50 p-10 flex flex-col justify-between hover:bg-slate-100 transition-colors duration-500">
                         {/* Abstract Grid Visual */}
-                        <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-center opacity-50 group-hover:opacity-80 transition-opacity">
-                            <div className="grid grid-cols-4 gap-4 p-8 transform rotate-3 scale-110">
-                                {[...Array(16)].map((_, i) => (
-                                    <div key={i} className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-slate-200"></div>
-                                ))}
-                            </div>
+                        {/* Dental Chart Screenshot */}
+                        <div className="absolute top-10 right-[-10%] w-[65%] h-full shadow-2xl rounded-tl-2xl overflow-hidden transform rotate-3 group-hover:rotate-0 transition-all duration-700 ease-out border border-slate-200/50">
+                            <img
+                                src="/dental-chart.png"
+                                alt="Dental Chart Interface"
+                                className="w-full h-full object-cover object-left-top"
+                            />
                         </div>
 
                         <div className="relative z-10 max-w-sm pt-4">
@@ -79,9 +80,11 @@ const Features: React.FC = () => {
                     {/* Card 4: Business Intel (Span 1 - Laptop Image) */}
                     <div className="md:col-span-1 group relative overflow-hidden rounded-[2.5rem] bg-slate-100">
                         <img
-                            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
+                            src="/financials-main.png"
                             alt="Analytics Dashboard"
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 object-top"
+
+
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
 

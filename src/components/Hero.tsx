@@ -76,7 +76,7 @@ const Hero: React.FC = () => {
                     {/* The Component rendered as the hero image */}
                     <div className="transform transition-all duration-500 group-hover:rotate-x-2 group-hover:scale-[1.01] shadow-[0_50px_100px_-20px_rgba(15,23,42,0.25)] rounded-xl border-4 border-slate-900/5 bg-slate-900 overflow-hidden">
                         <img
-                            src="/dashboard-preview.png"
+                            src="/dashboard-stats.png"
                             alt="DentCharts Dashboard"
                             className="w-full h-auto object-cover"
                         />
