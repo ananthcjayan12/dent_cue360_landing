@@ -25,9 +25,9 @@ const Navbar: React.FC = () => {
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl transition-all duration-300 ${isScrolled || mobileMenuOpen
-                        ? 'glass rounded-2xl shadow-glow'
-                        : 'bg-transparent'
+                className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl transition-all duration-300 ${isScrolled || mobileMenuOpen
+                    ? 'glass rounded-2xl shadow-glow'
+                    : 'bg-transparent'
                     }`}
             >
                 <div className="px-6 py-3 flex items-center justify-between">
@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
                         <div className="w-8 h-8 bg-dental-500 rounded-lg flex items-center justify-center text-white font-bold shadow-lg shadow-dental-500/30">
                             D
                         </div>
-                        <span className="font-bold text-slate-900 tracking-tight">DentCharts</span>
+                        <span className="font-bold text-slate-900 tracking-tight">Dent.Cue360</span>
                     </div>
 
                     {/* Desktop Nav */}

@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-dental-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-dental-500"></span>
                         </span>
-                        <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">v5.0 Pro System</span>
+                        <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">Smart Clinic Management</span>
                     </motion.div>
 
                     <motion.h1
@@ -35,9 +35,9 @@ const Hero: React.FC = () => {
                         transition={{ delay: 0.1 }}
                         className="text-6xl md:text-8xl font-bold tracking-tight text-slate-900 mb-8"
                     >
-                        Precision <br />
+                        The Smartest <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-dental-600 to-indigo-600">
-                            Engineered.
+                            Dental Platform
                         </span>
                     </motion.h1>
 
@@ -47,8 +47,8 @@ const Hero: React.FC = () => {
                         transition={{ delay: 0.2 }}
                         className="text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed"
                     >
-                        The operating system for high-performance dental clinics.
-                        <span className="text-slate-900 font-semibold"> Native speed, local-first database, and uncompromising design.</span>
+                        The intelligent platform for high-performance clinics.
+                        <span className="text-slate-900 font-semibold"> Charting, billing, and patient engagement in one beautiful interface.</span>
                     </motion.p>
 
                     <motion.div
@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
                     <div className="transform transition-all duration-500 group-hover:rotate-x-2 group-hover:scale-[1.01] shadow-[0_50px_100px_-20px_rgba(15,23,42,0.25)] rounded-xl border-4 border-slate-900/5 bg-slate-900 overflow-hidden">
                         <img
                             src="/dashboard-stats.png"
-                            alt="DentCharts Dashboard"
+                            alt="Dent.Cue360 Dashboard"
                             className="w-full h-auto object-cover"
                         />
                     </div>

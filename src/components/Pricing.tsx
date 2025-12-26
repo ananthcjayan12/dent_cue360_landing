@@ -7,70 +7,97 @@ const Pricing: React.FC = () => {
         <section id="pricing" className="py-24 bg-white">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-slate-900 tracking-tight mb-4">Pricing</h2>
-                    <p className="text-slate-500">Simple, transparent pricing for every stage.</p>
+                    <h2 className="text-4xl font-bold text-slate-900 tracking-tight mb-4">Transparent Pricing</h2>
+                    <p className="text-slate-500">Choose the perfect plan for your practice growth.</p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
-                    {/* Basic */}
-                    <div className="p-8 rounded-3xl border border-slate-100 bg-white">
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">Basic</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto items-stretch">
+
+                    {/* Essential Plan */}
+                    <div className="p-6 rounded-3xl border border-slate-200 bg-white flex flex-col hover:border-dental-200 transition-colors">
+                        <h3 className="text-lg font-bold text-slate-900 mb-2">Essential</h3>
                         <div className="mb-6">
-                            <span className="text-4xl font-bold text-slate-900">$0</span>
-                            <span className="text-slate-500 text-sm"> / per month</span>
+                            <span className="text-3xl font-bold text-slate-900">₹9,999</span>
+                            <span className="text-slate-500 text-xs"> / Year</span>
                         </div>
-                        <ul className="space-y-4 mb-8">
-                            {['Single Practitioner', 'Basic Charting', '1GB Storage'].map(f => (
-                                <li key={f} className="flex items-center gap-3 text-sm text-slate-600">
-                                    <CheckIcon className="w-4 h-4 text-slate-400" /> {f}
+                        <p className="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">2 Users</p>
+                        <ul className="space-y-3 mb-8 flex-grow">
+                            {['Booking Management', 'SMS Integration', 'WhatsApp Integration', 'Consultation Records', 'Smart Dental Charts', 'Smart Prescription Manager', 'Invoice Manager', 'Dashboard & Reports'].map(f => (
+                                <li key={f} className="flex items-start gap-2 text-xs font-medium text-slate-600">
+                                    <CheckIcon className="w-4 h-4 text-dental-500 flex-shrink-0" /> {f}
                                 </li>
                             ))}
                         </ul>
-                        <button className="w-full py-3 rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-slate-300 transition-colors">
+                        <button className="w-full py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors">
                             Get Started
                         </button>
                     </div>
 
-                    {/* Pro - Highlighted */}
+                    {/* Growth Plan - Highlighted */}
                     <motion.div
-                        whileHover={{ y: -10 }}
-                        className="p-8 rounded-3xl bg-dental-600 text-white shadow-2xl shadow-dental-200 relative z-10"
+                        whileHover={{ y: -8 }}
+                        className="p-6 rounded-3xl bg-slate-900 text-white shadow-xl shadow-slate-200 relative z-10 flex flex-col border border-slate-800"
                     >
-                        <h3 className="text-xl font-bold mb-2">Pro</h3>
-                        <div className="mb-6">
-                            <span className="text-5xl font-bold">$70</span>
-                            <span className="text-dental-200 text-sm"> / per month</span>
+                        <div className="absolute top-0 right-0 bg-dental-500 text-white text-[10px] uppercase font-bold px-3 py-1 rounded-bl-xl rounded-tr-2xl">
+                            Best Value
                         </div>
-                        <ul className="space-y-4 mb-8">
-                            {['Unlimited Practitioners', 'Advanced Imaging', 'Patient Portal', 'Priority Support'].map(f => (
-                                <li key={f} className="flex items-center gap-3 text-sm text-dental-50">
-                                    <CheckIcon className="w-4 h-4 text-white" /> {f}
+                        <h3 className="text-lg font-bold mb-2 text-white">Growth</h3>
+                        <div className="mb-6">
+                            <span className="text-3xl font-bold">₹14,999</span>
+                            <span className="text-slate-400 text-xs"> / Year</span>
+                        </div>
+                        <p className="text-xs font-semibold text-dental-400 mb-4 uppercase tracking-wider">5 Users</p>
+                        <ul className="space-y-3 mb-8 flex-grow">
+                            {['Everything in Essential', 'Expense Manager', 'Premium Support', 'Website Builder', 'Smart Reports', 'AI Agent'].map(f => (
+                                <li key={f} className="flex items-start gap-2 text-xs font-medium text-slate-300">
+                                    <CheckIcon className="w-4 h-4 text-dental-400 flex-shrink-0" /> {f}
                                 </li>
                             ))}
                         </ul>
-                        <button className="w-full py-3 rounded-xl bg-white text-dental-600 font-bold shadow-lg hover:shadow-xl transition-all">
-                            Get Pro
+                        <button className="w-full py-3 rounded-xl bg-dental-600 text-white font-bold text-sm hover:bg-dental-500 transition-colors shadow-lg">
+                            Get Growth
                         </button>
                     </motion.div>
 
-                    {/* Enterprise */}
-                    <div className="p-8 rounded-3xl border border-slate-100 bg-white">
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">Enterprise</h3>
+                    {/* Empire Plan */}
+                    <div className="p-6 rounded-3xl border border-slate-200 bg-white flex flex-col hover:border-dental-200 transition-colors">
+                        <h3 className="text-lg font-bold text-slate-900 mb-2">Empire</h3>
                         <div className="mb-6">
-                            <span className="text-4xl font-bold text-slate-900">$120</span>
-                            <span className="text-slate-500 text-sm"> / per month</span>
+                            <span className="text-3xl font-bold text-slate-900">₹24,999</span>
+                            <span className="text-slate-500 text-xs"> / Year</span>
                         </div>
-                        <ul className="space-y-4 mb-8">
-                            {['Custom API', 'SLA Guarantee', 'Dedicated Manager'].map(f => (
-                                <li key={f} className="flex items-center gap-3 text-sm text-slate-600">
-                                    <CheckIcon className="w-4 h-4 text-slate-400" /> {f}
+                        <p className="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">5 Users/Clinic (Max 5)</p>
+                        <ul className="space-y-3 mb-8 flex-grow">
+                            {['Everything in Growth', 'Multi Clinic Management', 'Centralized Admin', 'Advanced Analytics'].map(f => (
+                                <li key={f} className="flex items-start gap-2 text-xs font-medium text-slate-600">
+                                    <CheckIcon className="w-4 h-4 text-dental-500 flex-shrink-0" /> {f}
                                 </li>
                             ))}
                         </ul>
-                        <button className="w-full py-3 rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-slate-300 transition-colors">
+                        <button className="w-full py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors">
+                            Get Empire
+                        </button>
+                    </div>
+
+                    {/* Enterprise Plan */}
+                    <div className="p-6 rounded-3xl border border-slate-200 bg-dental-50/50 flex flex-col">
+                        <h3 className="text-lg font-bold text-slate-900 mb-2">Enterprise</h3>
+                        <div className="mb-6">
+                            <span className="text-2xl font-bold text-slate-900">Custom</span>
+                        </div>
+                        <p className="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">Unlimited Scale</p>
+                        <ul className="space-y-3 mb-8 flex-grow">
+                            {['Custom Pricing', 'Custom Integrations', 'Dedicated Account Mgr', 'SLA & Priority Support'].map(f => (
+                                <li key={f} className="flex items-start gap-2 text-xs font-medium text-slate-600">
+                                    <CheckIcon className="w-4 h-4 text-slate-400 flex-shrink-0" /> {f}
+                                </li>
+                            ))}
+                        </ul>
+                        <button className="w-full py-3 rounded-xl border-2 border-slate-900 text-slate-900 font-bold text-sm hover:bg-slate-900 hover:text-white transition-colors">
                             Contact Sales
                         </button>
                     </div>
+
                 </div>
             </div>
         </section>

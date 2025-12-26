@@ -2,11 +2,11 @@ import React from 'react';
 
 const Testimonials: React.FC = () => {
     const reviews = [
-        { name: "Dr. Sarah Chen", role: "Orthodontist", text: "The speed is unmatched. It feels like an extension of my hand." },
-        { name: "Dr. Michael Ross", role: "DDS, Ross Family Dental", text: "Finally, software that doesn't look like Windows 95." },
-        { name: "Jessica Wu", role: "Practice Manager", text: "Scheduling is actually fun now. The patients love the online booking." },
-        { name: "Dr. James Wilson", role: "Cosmetic Dentist", text: "The iPad app is a game changer for chairside consultations." },
-        { name: "Dr. Linda Martinez", role: "Pediatric Dentist", text: "Visual charting helps parents understand treatment plans instantly." }
+        { name: "Dr. Rajesh Malhotra", role: "Orthodontist, Mumbai", text: "Dent.Cue360's charting is intuitive. The 3D model helps patients visualize issues instantly." },
+        { name: "Dr. Priya Sharma", role: "DDS, Sharma Family Dental", text: "The WhatsApp integration cut our no-shows by 40%. It pays for itself." },
+        { name: "Anjali Gupta", role: "Clinic Manager, Delhi", text: "Billing used to take hours. Now generate invoices and tax reports in seconds." },
+        { name: "Dr. Vikram Singh", role: "Implantologist", text: "The iPad app is perfect for chairside consultations. No more running back to the PC." },
+        { name: "Dr. Meera Reddy", role: "Pediatric Dentist", text: "Parents love the digital prescriptions. It makes the whole experience premium." }
     ];
 
     // Duplicate for infinite scroll
@@ -19,10 +19,10 @@ const Testimonials: React.FC = () => {
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-50 to-transparent z-10"></div>
 
             <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
-                <h2 className="text-sm font-bold text-dental-600 uppercase tracking-widest">Trusted by Modern Practices</h2>
+                <h2 className="text-sm font-bold text-dental-600 uppercase tracking-widest">Trusted by Top Clinicians</h2>
             </div>
 
-            <div className="flex w-fit animate-marquee">
+            <div className="flex w-fit animate-marquee hover:pause-marquee" style={{ animationDuration: '60s' }}>
                 {marqueeReviews.map((review, i) => (
                     <div key={i} className="w-[350px] mx-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm flex-shrink-0 hover:border-dental-200 transition-colors">
                         <div className="flex gap-1 mb-4">
