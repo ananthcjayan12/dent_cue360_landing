@@ -17,12 +17,12 @@ const Pricing: React.FC = () => {
                     <div className="p-6 rounded-3xl border border-slate-200 bg-white flex flex-col hover:border-dental-200 transition-colors">
                         <h3 className="text-lg font-bold text-slate-900 mb-2">Essential</h3>
                         <div className="mb-6">
-                            <span className="text-3xl font-bold text-slate-900">₹9,999</span>
+                            <span className="text-3xl font-bold text-slate-900">₹10,999</span>
                             <span className="text-slate-500 text-xs"> / Year</span>
                         </div>
                         <p className="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">2 Users</p>
                         <ul className="space-y-3 mb-8 flex-grow">
-                            {['Booking Management', 'SMS Integration', 'WhatsApp Integration', 'Consultation Records', 'Smart Dental Charts', 'Smart Prescription Manager', 'Invoice Manager', 'Dashboard & Reports'].map(f => (
+                            {['Booking Management', 'Consultation Records', 'Smart Dental Charts', 'Smart Prescription Manager', 'Invoice Manager', 'Dashboard & Reports', 'Companion Smart Mobile App' ].map(f => (
                                 <li key={f} className="flex items-start gap-2 text-xs font-medium text-slate-600">
                                     <CheckIcon className="w-4 h-4 text-dental-500 flex-shrink-0" /> {f}
                                 </li>
@@ -48,7 +48,7 @@ const Pricing: React.FC = () => {
                         </div>
                         <p className="text-xs font-semibold text-dental-400 mb-4 uppercase tracking-wider">5 Users</p>
                         <ul className="space-y-3 mb-8 flex-grow">
-                            {['Everything in Essential', 'Expense Manager', 'Premium Support', 'Website Builder', 'Smart Reports', 'AI Agent'].map(f => (
+                            {['Everything in Essential', 'Whatsapp Integration', 'User Role Management', 'Expense Manager', 'Premium Support', 'Website Builder', 'Smart Reports'].map(f => (
                                 <li key={f} className="flex items-start gap-2 text-xs font-medium text-slate-300">
                                     <CheckIcon className="w-4 h-4 text-dental-400 flex-shrink-0" /> {f}
                                 </li>
