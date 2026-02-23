@@ -43,7 +43,7 @@ const Pricing: React.FC = () => {
                         </div>
                         <h3 className="text-lg font-bold mb-2 text-white">Growth</h3>
                         <div className="mb-6">
-                            <span className="text-3xl font-bold">₹14,999</span>
+                            <span className="text-3xl font-bold">₹16,999</span>
                             <span className="text-slate-400 text-xs"> / Year</span>
                         </div>
                         <p className="text-xs font-semibold text-dental-400 mb-4 uppercase tracking-wider">5 Users</p>
