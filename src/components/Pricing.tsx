@@ -63,7 +63,7 @@ const Pricing: React.FC = () => {
                     <div className="p-6 rounded-3xl border border-slate-200 bg-white flex flex-col hover:border-dental-200 transition-colors">
                         <h3 className="text-lg font-bold text-slate-900 mb-2">Empire</h3>
                         <div className="mb-6">
-                            <span className="text-3xl font-bold text-slate-900">₹24,999</span>
+                            <span className="text-3xl font-bold text-slate-900">₹26,999</span>
                             <span className="text-slate-500 text-xs"> / Year</span>
                         </div>
                         <p className="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">5 Users/Clinic (Max 5)</p>
