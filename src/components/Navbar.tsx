@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -32,12 +33,12 @@ const Navbar: React.FC = () => {
             >
                 <div className="px-6 py-3 flex items-center justify-between">
                     {/* Logo */}
-                    <div className="flex items-center gap-2 cursor-pointer">
+                    <Link to="/" className="flex items-center gap-2 cursor-pointer">
                         <div className="w-8 h-8 bg-dental-500 rounded-lg flex items-center justify-center text-white font-bold shadow-lg shadow-dental-500/30">
                             D
                         </div>
                         <span className="font-bold text-slate-900 tracking-tight">Dent.Cue360</span>
-                    </div>
+                    </Link>
 
                     {/* Desktop Nav */}
                     <div className="hidden md:flex items-center gap-8">
