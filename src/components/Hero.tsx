@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigateToContact } from '../hooks/useNavigateToContact';
 
 
 const Hero: React.FC = () => {
+    const goToContact = useNavigateToContact();
     return (
         <section className="relative pt-28 pb-40 overflow-hidden bg-slate-50">
             {/* Background Decor */}
@@ -33,7 +35,7 @@ const Hero: React.FC = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-6xl md:text-8xl font-bold tracking-tight text-slate-900 mb-8"
+                        className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-slate-900 mb-8"
                     >
                         The Smartest <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-dental-600 to-indigo-600">
@@ -45,7 +47,7 @@ const Hero: React.FC = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed"
+                        className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed"
                     >
                         The intelligent platform for high-performance clinics.
                         <span className="text-slate-900 font-semibold"> Charting, billing, and patient engagement in one beautiful interface.</span>
@@ -55,12 +57,18 @@ const Hero: React.FC = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="flex items-center justify-center gap-4"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
-                        <button className="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-2xl shadow-slate-900/20 hover:scale-105 transition-all">
+                        <button
+                            onClick={() => goToContact('Start 14-Day Trial')}
+                            className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-2xl shadow-slate-900/20 hover:scale-105 transition-all"
+                        >
                             Start 14-Day Trial
                         </button>
-                        <button className="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all">
+                        <button
+                            onClick={() => goToContact('View Interactive Demo')}
+                            className="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all"
+                        >
                             View Interactive Demo
                         </button>
                     </motion.div>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigateToContact } from '../hooks/useNavigateToContact';
 import { CheckIcon } from '@heroicons/react/24/solid';
 
 const Pricing: React.FC = () => {
+    const goToContact = useNavigateToContact();
     return (
         <section id="pricing" className="py-24 bg-white">
             <div className="max-w-7xl mx-auto px-6">
@@ -28,7 +30,10 @@ const Pricing: React.FC = () => {
                                 </li>
                             ))}
                         </ul>
-                        <button className="w-full py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors">
+                        <button
+                            onClick={() => goToContact('Interested in the Essential Plan')}
+                            className="w-full py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors"
+                        >
                             Get Started
                         </button>
                     </div>
@@ -54,7 +59,10 @@ const Pricing: React.FC = () => {
                                 </li>
                             ))}
                         </ul>
-                        <button className="w-full py-3 rounded-xl bg-dental-600 text-white font-bold text-sm hover:bg-dental-500 transition-colors shadow-lg">
+                        <button
+                            onClick={() => goToContact('Interested in the Growth Plan')}
+                            className="w-full py-3 rounded-xl bg-dental-600 text-white font-bold text-sm hover:bg-dental-500 transition-colors shadow-lg"
+                        >
                             Get Growth
                         </button>
                     </motion.div>
@@ -74,7 +82,10 @@ const Pricing: React.FC = () => {
                                 </li>
                             ))}
                         </ul>
-                        <button className="w-full py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors">
+                        <button
+                            onClick={() => goToContact('Interested in the Empire Plan')}
+                            className="w-full py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors"
+                        >
                             Get Empire
                         </button>
                     </div>
@@ -93,7 +104,10 @@ const Pricing: React.FC = () => {
                                 </li>
                             ))}
                         </ul>
-                        <button className="w-full py-3 rounded-xl border-2 border-slate-900 text-slate-900 font-bold text-sm hover:bg-slate-900 hover:text-white transition-colors">
+                        <button
+                            onClick={() => goToContact('Enterprise / Custom Pricing Enquiry')}
+                            className="w-full py-3 rounded-xl border-2 border-slate-900 text-slate-900 font-bold text-sm hover:bg-slate-900 hover:text-white transition-colors"
+                        >
                             Contact Sales
                         </button>
                     </div>
