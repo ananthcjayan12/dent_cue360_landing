@@ -32,11 +32,9 @@ const Footer: React.FC = () => {
                     <div className="flex items-center gap-2 mb-4 md:mb-0">
                         <img src="/logo.png" alt="Cue360 Logo" className="h-14 md:h-16 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
                     </div>
-                    <div className="flex gap-8">
-                        <Link to="/privacy" className="hover:text-slate-900">Privacy</Link>
-                        <Link to="/terms" className="hover:text-slate-900">Terms</Link>
-                        <a href="#" className="hover:text-slate-900">Twitter</a>
-                        <a href="#" className="hover:text-slate-900">GitHub</a>
+                    <div className="flex items-center gap-8">
+                        <Link to="/privacy" className="hover:text-slate-900 transition-colors">Privacy</Link>
+                        <Link to="/terms" className="hover:text-slate-900 transition-colors">Terms</Link>
                     </div>
                 </div>
             </div>
