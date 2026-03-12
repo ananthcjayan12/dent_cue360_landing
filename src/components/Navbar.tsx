@@ -30,19 +30,23 @@ const Navbar: React.FC = () => {
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[96%] md:w-[98%] max-w-[1400px] transition-all duration-300 ${isScrolled || mobileMenuOpen
-                    ? 'glass rounded-2xl shadow-glow'
+                className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${isScrolled || mobileMenuOpen
+                    ? 'glass shadow-sm border-b border-white/20'
                     : 'bg-transparent'
                     }`}
             >
-                <div className="px-4 md:px-8 py-3 md:py-4 flex items-center justify-between gap-3 md:gap-6">
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2 cursor-pointer shrink-0">
-                        <img src="/logo.png" alt="Cue360 Logo" className="h-14 md:h-16 lg:h-20 w-auto object-contain" />
+                <div className="w-full px-4 md:px-8 py-3 md:py-4 flex items-center justify-between">
+                    {/* Logo - Left */}
+                    <Link 
+                        to="/" 
+                        onClick={() => window.scrollTo(0, 0)}
+                        className="flex items-center gap-2 cursor-pointer z-50 shrink-0"
+                    >
+                        <img src="/logo.png" alt="Cue360 Logo" className="h-12 md:h-16 lg:h-20 w-auto object-contain transition-transform hover:scale-105" />
                     </Link>
 
-                    {/* Desktop Nav */}
-                    <div className="hidden lg:flex items-center gap-5 xl:gap-7 flex-1 justify-center">
+                    {/* Centered Desktop Nav */}
+                    <div className="hidden lg:flex items-center justify-center gap-6 xl:gap-10 absolute left-1/2 -translate-x-1/2">
                         {navLinks.map(link => (
                             link.href.startsWith('/#') ? (
                                 <a key={link.name} href={link.href} className="text-sm font-medium text-slate-600 hover:text-dental-600 transition-colors whitespace-nowrap">
@@ -56,25 +60,28 @@ const Navbar: React.FC = () => {
                         ))}
                     </div>
 
-                    {/* CTA */}
-                    <div className="hidden lg:flex items-center gap-4 shrink-0">
-                        <a href="https://app.cue360.in" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-900 hover:text-dental-600 whitespace-nowrap">Login</a>
+                    {/* Right Area - CTA & Mobile Toggle */}
+                    <div className="flex items-center gap-4 shrink-0 z-50">
+                        {/* Desktop CTA */}
+                        <div className="hidden lg:flex items-center gap-4">
+                            <a href="https://app.cue360.in" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-900 hover:text-dental-600 whitespace-nowrap">Login</a>
+                            <button
+                                onClick={() => goToContact('Book a Demo')}
+                                className="bg-slate-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-slate-800 hover:shadow-lg transition-all active:scale-95 whitespace-nowrap"
+                            >
+                                Book Demo
+                            </button>
+                        </div>
+
+                        {/* Mobile Toggle */}
                         <button
-                            onClick={() => goToContact('Book a Demo')}
-                            className="bg-slate-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-slate-800 hover:shadow-lg transition-all active:scale-95 whitespace-nowrap"
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            className="lg:hidden p-2 text-slate-800 rounded-lg hover:bg-slate-100 transition-colors"
+                            aria-label="Toggle menu"
                         >
-                            Book Demo
+                            {mobileMenuOpen ? <XMarkIcon className="w-7 h-7" /> : <Bars3Icon className="w-7 h-7" />}
                         </button>
                     </div>
-
-                    {/* Mobile Toggle */}
-                    <button
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="lg:hidden p-2 text-slate-800 rounded-lg hover:bg-slate-100 transition-colors"
-                        aria-label="Toggle menu"
-                    >
-                        {mobileMenuOpen ? <XMarkIcon className="w-7 h-7" /> : <Bars3Icon className="w-7 h-7" />}
-                    </button>
                 </div>
 
                 {/* Mobile Menu */}
