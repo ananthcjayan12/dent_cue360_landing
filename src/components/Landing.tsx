@@ -1,8 +1,10 @@
 import Navbar from './Navbar';
 import Hero from './Hero';
+import WhatsAppFeature from './WhatsAppFeature';
 import Features from './Features';
-import Testimonials from './Testimonials';
+import ROICalculator from './ROICalculator';
 import Pricing from './Pricing';
+import Testimonials from './Testimonials';
 import Contact from './Contact';
 import Footer from './Footer';
 
@@ -11,7 +13,9 @@ function Landing() {
         <>
             <Navbar />
             <Hero />
+            <WhatsAppFeature />
             <Features />
+            <ROICalculator />
             <Pricing />
             <Testimonials />
             <Contact />

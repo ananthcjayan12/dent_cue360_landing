@@ -6,7 +6,7 @@ import { useNavigateToContact } from '../hooks/useNavigateToContact';
 const Hero: React.FC = () => {
     const goToContact = useNavigateToContact();
     return (
-        <section className="relative pt-28 pb-40 overflow-hidden bg-slate-50">
+        <section className="relative pt-24 lg:pt-28 pb-16 lg:pb-20 overflow-hidden bg-slate-50 min-h-[85vh] flex items-center">
             {/* Background Decor */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-[-20%] left-[20%] w-[800px] h-[800px] bg-dental-200/40 rounded-full blur-[120px]" />
@@ -15,31 +15,30 @@ const Hero: React.FC = () => {
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="max-w-[90rem] mx-auto w-full px-6 sm:px-8 lg:px-12 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
-                {/* Header Content */}
-                <div className="text-center max-w-4xl mx-auto mb-20">
+                {/* Left Column Content */}
+                <div className="w-full lg:w-[45%] xl:w-[40%] text-left lg:pt-0">
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 bg-white/50 backdrop-blur border border-white/60 shadow-sm rounded-full px-4 py-1.5 mb-8"
+                        className="inline-flex items-center gap-2 bg-dental-50 shadow-sm rounded-full px-4 py-1.5 mb-8"
                     >
                         <span className="flex h-2 w-2 relative">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-dental-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-dental-500"></span>
                         </span>
-                        <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">Smart Clinic Management</span>
+                        <span className="text-xs font-semibold text-dental-600 uppercase tracking-widest">SMART CLINIC MANAGEMENT</span>
                     </motion.div>
 
                     <motion.h1
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-slate-900 mb-8"
+                        className="text-5xl sm:text-6xl md:text-[5rem] lg:text-[5.5rem] font-bold tracking-tight text-slate-900 mb-8 leading-[1.05]"
                     >
-                        The Smartest <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-dental-600 to-indigo-600">
-                            Dental Platform
+                        Your clinic, <br /> fully automated. <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-dental-600 to-indigo-600 pb-2 inline-block">
+                            Starting today.
                         </span>
                     </motion.h1>
 
@@ -47,51 +46,84 @@ const Hero: React.FC = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed"
+                        className="text-lg sm:text-xl text-slate-600 mb-10 leading-relaxed max-w-lg"
                     >
-                        The intelligent platform for high-performance clinics.
-                        <span className="text-slate-900 font-semibold"> Charting, billing, and patient engagement in one beautiful interface.</span>
+                        Cut no-shows by up to <span className="text-slate-900 font-extrabold">40%</span>. Get paid faster. Know exactly where your clinic is making — and losing — money.
                     </motion.p>
 
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                        className="flex flex-col sm:flex-row items-center justify-start gap-4 mb-12 w-full max-w-md lg:max-w-none"
                     >
                         <button
-                            onClick={() => goToContact('Start 14-Day Trial')}
-                            className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-2xl shadow-slate-900/20 hover:scale-105 transition-all"
+                            onClick={() => goToContact('Start 14-Day Free Trial')}
+                            className="w-full sm:w-auto px-8 py-3.5 bg-dental-600 text-white rounded-xl font-bold hover:bg-dental-700 hover:scale-105 transition-all shadow-lg shadow-dental-600/20"
                         >
-                            Start 14-Day Trial
+                            Start 14-Day Free Trial
                         </button>
                         <button
-                            onClick={() => goToContact('View Interactive Demo')}
-                            className="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all"
+                            onClick={() => goToContact('Watch 60-Second Demo')}
+                            className="w-full sm:w-auto px-8 py-3.5 bg-transparent text-slate-900 border-2 border-slate-900 rounded-xl font-bold hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
                         >
-                            View Interactive Demo
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4l12 6-12 6z" />
+                            </svg>
+                            Watch 60-Second Demo
                         </button>
                     </motion.div>
+
                 </div>
 
-                {/* 3D Dashboard Preview */}
+                {/* Right Column: 3D Dashboard Preview */}
                 <motion.div
-                    initial={{ opacity: 0, y: 100, rotateX: 20 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="perspective-[2000px] relative group"
+                    className="w-full lg:w-[55%] xl:w-[60%] flex flex-col relative group mt-8 lg:mt-0"
                 >
-                    {/* The Component rendered as the hero image */}
-                    <div className="transform transition-all duration-500 group-hover:rotate-x-2 group-hover:scale-[1.01] shadow-[0_50px_100px_-20px_rgba(15,23,42,0.25)] rounded-xl border-4 border-slate-900/5 bg-slate-900 overflow-hidden">
+                    {/* Punchy Trust Pillars moved above the image */}
+                    <div className="flex flex-row items-stretch justify-between w-full lg:w-11/12 mx-auto bg-white/80 backdrop-blur-md rounded-2xl border border-slate-200 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] mb-6 z-20 relative">
+                        <div className="flex flex-col items-center justify-center p-4 sm:p-5 flex-1 border-r border-slate-100 text-center group/pillar cursor-default">
+                            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-dental-50 group-hover/pillar:bg-dental-100 transition-colors mb-3 text-dental-600">
+                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span className="font-extrabold text-slate-900 group-hover/pillar:text-dental-700 transition-colors text-sm sm:text-base mb-1">Easiest</span>
+                            <span className="text-slate-500 font-medium text-[10px] sm:text-xs leading-snug">Instant Adoption- No Experience Required</span>
+                        </div>
+                        <div className="flex flex-col items-center justify-center p-4 sm:p-5 flex-1 border-r border-slate-100 text-center group/pillar cursor-default">
+                            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-50 group-hover/pillar:bg-amber-100 transition-colors mb-3 text-amber-500">
+                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <span className="font-extrabold text-slate-900 group-hover/pillar:text-amber-600 transition-colors text-sm sm:text-base mb-1">Fastest</span>
+                            <span className="text-slate-500 font-medium text-[10px] sm:text-xs leading-snug">0.1s real-time sync</span>
+                        </div>
+                        <div className="flex flex-col items-center justify-center p-4 sm:p-5 flex-1 text-center group/pillar cursor-default">
+                            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-indigo-50 group-hover/pillar:bg-indigo-100 transition-colors mb-3 text-indigo-600">
+                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="9" strokeWidth="2.5" />
+                                    <circle cx="12" cy="12" r="3" strokeWidth="2.5" />
+                                </svg>
+                            </div>
+                            <span className="font-extrabold text-slate-900 group-hover/pillar:text-indigo-700 transition-colors text-sm sm:text-base mb-1">Smartest</span>
+                            <span className="text-slate-500 font-medium text-[10px] sm:text-xs leading-snug">Automated financials</span>
+                        </div>
+                    </div>
+
+                    <div className="transform transition-all duration-500 hover:-translate-y-2 hover:scale-[1.01] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] rounded-2xl border border-slate-200/50 bg-white overflow-hidden z-10">
                         <img
                             src="/dashboard-stats.png"
                             alt="Dent.Cue360 Dashboard"
                             className="w-full h-auto object-cover"
                         />
                     </div>
-
                     {/* Glow effect behind */}
-                    <div className="absolute -inset-4 bg-gradient-to-r from-dental-500 to-purple-500 rounded-xl blur-3xl opacity-20 -z-10 group-hover:opacity-30 transition-opacity duration-1000"></div>
+                    <div className="absolute -inset-4 bg-gradient-to-tr from-dental-100 to-dental-50 rounded-3xl blur-2xl opacity-50 -z-10 group-hover:opacity-70 transition-opacity duration-700"></div>
                 </motion.div>
 
             </div>

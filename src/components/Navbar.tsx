@@ -28,15 +28,15 @@ const Navbar: React.FC = () => {
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${isScrolled || mobileMenuOpen
-                    ? 'glass shadow-sm border-b border-white/20'
+                className={`sticky top-0 w-full z-[1000] transition-all duration-300 ${isScrolled || mobileMenuOpen
+                    ? 'glass shadow-md border-b border-white/20'
                     : 'bg-transparent'
                     }`}
             >
                 <div className="w-full px-4 md:px-8 py-3 md:py-4 flex items-center justify-between">
                     {/* Logo - Left */}
-                    <Link 
-                        to="/" 
+                    <Link
+                        to="/"
                         onClick={() => window.scrollTo(0, 0)}
                         className="flex items-center gap-2 cursor-pointer z-50 shrink-0"
                     >
@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
                     </Link>
 
                     {/* Centered Desktop Nav */}
-                    <div className="hidden lg:flex items-center justify-center gap-6 xl:gap-10 absolute left-1/2 -translate-x-1/2">
+                    <div className="hidden md:flex items-center justify-center gap-6 xl:gap-10 absolute left-1/2 -translate-x-1/2">
                         {navLinks.map(link => (
                             link.href.startsWith('/#') ? (
                                 <a key={link.name} href={link.href} className="text-sm font-medium text-slate-600 hover:text-dental-600 transition-colors whitespace-nowrap">
@@ -59,22 +59,28 @@ const Navbar: React.FC = () => {
                     </div>
 
                     {/* Right Area - CTA & Mobile Toggle */}
-                    <div className="flex items-center gap-4 shrink-0 z-50">
+                    <div className="flex items-center gap-4 shrink-0 z-[1000]">
                         {/* Desktop CTA */}
-                        <div className="hidden lg:flex items-center gap-4">
-                            <a href="https://app.cue360.in" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-900 hover:text-dental-600 whitespace-nowrap">Login</a>
+                        <div className="hidden md:flex items-center gap-4">
+                            <a href="https://dent.cue360.in/" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-900 hover:text-dental-600 whitespace-nowrap">Login</a>
                             <button
                                 onClick={() => goToContact('Book a Demo')}
                                 className="bg-slate-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-slate-800 hover:shadow-lg transition-all active:scale-95 whitespace-nowrap"
                             >
                                 Book Demo
                             </button>
+                            <button
+                                onClick={() => goToContact('Start Free Trial')}
+                                className="bg-blue-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-800 hover:shadow-lg transition-all active:scale-95 whitespace-nowrap"
+                            >
+                                Start Free Trial
+                            </button>
                         </div>
 
                         {/* Mobile Toggle */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="lg:hidden p-2 text-slate-800 rounded-lg hover:bg-slate-100 transition-colors"
+                            className="md:hidden p-2 text-slate-800 rounded-lg hover:bg-slate-100 transition-colors"
                             aria-label="Toggle menu"
                         >
                             {mobileMenuOpen ? <XMarkIcon className="w-7 h-7" /> : <Bars3Icon className="w-7 h-7" />}
@@ -89,41 +95,35 @@ const Navbar: React.FC = () => {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden lg:hidden"
+                            className="overflow-hidden md:hidden"
                         >
                             <div className="mx-4 mb-4 p-4 space-y-4 bg-white/95 backdrop-blur-xl border border-slate-200/60 rounded-2xl shadow-2xl">
                                 <div className="flex flex-col gap-2">
-                                {navLinks.map(link => (
-                                    link.href.startsWith('/#') ? (
-                                        <a
-                                            key={link.name}
-                                            href={link.href}
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
-                                        >
-                                            {link.name}
-                                        </a>
-                                    ) : (
-                                        <Link
-                                            key={link.name}
-                                            to={link.href}
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
-                                        >
-                                            {link.name}
-                                        </Link>
-                                    )
-                                ))}
+                                    {navLinks.map(link => (
+                                        link.href.startsWith('/#') ? (
+                                            <a
+                                                key={link.name}
+                                                href={link.href}
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
+                                            >
+                                                {link.name}
+                                            </a>
+                                        ) : (
+                                            <Link
+                                                key={link.name}
+                                                to={link.href}
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        )
+                                    ))}
                                 </div>
                                 <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
-                                    <button
-                                        onClick={() => { setMobileMenuOpen(false); goToContact('Book a Demo'); }}
-                                        className="w-full bg-slate-900 text-white py-3 rounded-xl font-medium hover:bg-slate-800 transition-colors"
-                                    >
-                                        Book Demo
-                                    </button>
                                     <a
-                                        href="https://app.cue360.in"
+                                        href="https://dent.cue360.in/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-full text-center text-slate-600 py-3 font-medium hover:text-slate-900 transition-colors"
@@ -136,6 +136,25 @@ const Navbar: React.FC = () => {
                     )}
                 </AnimatePresence>
             </motion.nav>
+
+            {/* Mobile Bottom CTA Bar */}
+            <div
+                className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-[1000] flex gap-3"
+                style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
+            >
+                <button
+                    onClick={() => goToContact('View Demo')}
+                    className="flex-1 bg-white border-2 border-slate-900 text-slate-900 py-3 rounded-xl font-semibold hover:bg-slate-50 transition-colors"
+                >
+                    View Demo
+                </button>
+                <button
+                    onClick={() => goToContact('Start Free Trial')}
+                    className="flex-1 bg-blue-900 text-white py-3 rounded-xl font-semibold hover:bg-blue-800 transition-colors"
+                >
+                    Start Free Trial
+                </button>
+            </div>
         </>
     );
 };
