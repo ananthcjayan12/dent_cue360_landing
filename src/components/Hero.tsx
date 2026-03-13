@@ -25,10 +25,10 @@ const Hero: React.FC = () => {
                         className="inline-flex items-center gap-2 bg-white/50 backdrop-blur border border-white/60 shadow-sm rounded-full px-4 py-1.5 mb-8"
                     >
                         <span className="flex h-2 w-2 relative">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-dental-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-dental-500"></span>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                         </span>
-                        <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">Smart Clinic Management</span>
+                        <span className="text-sm font-semibold text-slate-700 tracking-wide">Trusted by dental clinics across India</span>
                     </motion.div>
 
                     <motion.h1
@@ -37,9 +37,9 @@ const Hero: React.FC = () => {
                         transition={{ delay: 0.1 }}
                         className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-slate-900 mb-8"
                     >
-                        The Smartest <br />
+                        Your clinic, fully automated. <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-dental-600 to-indigo-600">
-                            Dental Platform
+                            Starting today.
                         </span>
                     </motion.h1>
 
@@ -47,30 +47,72 @@ const Hero: React.FC = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed"
+                        className="text-xl sm:text-2xl md:text-3xl text-slate-600 max-w-4xl mx-auto mb-10 leading-relaxed"
                     >
-                        The intelligent platform for high-performance clinics.
-                        <span className="text-slate-900 font-semibold"> Charting, billing, and patient engagement in one beautiful interface.</span>
+                        <span className="text-slate-900 font-bold">Cut no-shows by up to 40%. Get paid faster.</span> <br className="hidden sm:block" />
+                        <span className="text-slate-700 font-medium">Know exactly where your clinic is making — and losing — money.</span>
                     </motion.p>
 
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
                     >
                         <button
-                            onClick={() => goToContact('Start 14-Day Trial')}
-                            className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white rounded-xl font-bold shadow-2xl shadow-slate-900/20 hover:scale-105 transition-all"
+                            onClick={() => goToContact('Start 14-Day Free Trial')}
+                            className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white rounded-xl text-lg font-bold shadow-2xl shadow-slate-900/30 hover:scale-105 transition-all"
                         >
-                            Start 14-Day Trial
+                            Start 14-Day Free Trial
                         </button>
                         <button
-                            onClick={() => goToContact('View Interactive Demo')}
-                            className="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all"
+                            onClick={() => goToContact('Watch 60-Second Demo')}
+                            className="w-full sm:w-auto px-10 py-5 bg-transparent text-slate-900 border-2 border-slate-300 rounded-xl text-lg font-bold hover:border-slate-900 hover:bg-slate-50 transition-all"
                         >
-                            View Interactive Demo
+                            Watch 60-Second Demo
                         </button>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="flex flex-col sm:flex-row items-stretch justify-center gap-6 sm:gap-8 mb-16 w-full max-w-5xl mx-auto"
+                    >
+                        <div className="flex items-center gap-5 bg-white shadow-md hover:shadow-lg transition-shadow border border-slate-200/60 rounded-2xl p-5 flex-1">
+                            <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full bg-green-100 text-green-600">
+                                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div className="flex flex-col text-left">
+                                <span className="font-extrabold text-slate-900 text-xl mb-1">Easiest</span>
+                                <span className="text-slate-600 font-semibold text-sm leading-snug">Instant Adoption- No Experience Required</span>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-5 bg-white shadow-md hover:shadow-lg transition-shadow border border-slate-200/60 rounded-2xl p-5 flex-1">
+                            <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full bg-yellow-100 text-yellow-600">
+                                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div className="flex flex-col text-left">
+                                <span className="font-extrabold text-slate-900 text-xl mb-1">Fastest</span>
+                                <span className="text-slate-600 font-semibold text-sm leading-snug">0.1s real-time sync</span>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-5 bg-white shadow-md hover:shadow-lg transition-shadow border border-slate-200/60 rounded-2xl p-5 flex-1">
+                            <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full bg-purple-100 text-purple-600">
+                                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="9" strokeWidth="2.5" />
+                                    <circle cx="12" cy="12" r="3" strokeWidth="2.5" />
+                                </svg>
+                            </div>
+                            <div className="flex flex-col text-left">
+                                <span className="font-extrabold text-slate-900 text-xl mb-1">Smartest</span>
+                                <span className="text-slate-600 font-semibold text-sm leading-snug">Automated financial intelligence</span>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
 
