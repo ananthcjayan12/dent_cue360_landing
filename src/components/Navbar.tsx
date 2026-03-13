@@ -21,8 +21,6 @@ const Navbar: React.FC = () => {
         { name: 'Features', href: '/#features' },
         { name: 'Showcase', href: '/#showcase' },
         { name: 'Pricing', href: '/#pricing' },
-        { name: 'Privacy', href: '/privacy' },
-        { name: 'Terms', href: '/terms' },
     ];
 
     return (
@@ -37,8 +35,8 @@ const Navbar: React.FC = () => {
             >
                 <div className="w-full px-4 md:px-8 py-3 md:py-4 flex items-center justify-between">
                     {/* Logo - Left */}
-                    <Link 
-                        to="/" 
+                    <Link
+                        to="/"
                         onClick={() => window.scrollTo(0, 0)}
                         className="flex items-center gap-2 cursor-pointer z-50 shrink-0"
                     >
@@ -101,27 +99,27 @@ const Navbar: React.FC = () => {
                         >
                             <div className="mx-4 mb-4 p-4 space-y-4 bg-white/95 backdrop-blur-xl border border-slate-200/60 rounded-2xl shadow-2xl">
                                 <div className="flex flex-col gap-2">
-                                {navLinks.map(link => (
-                                    link.href.startsWith('/#') ? (
-                                        <a
-                                            key={link.name}
-                                            href={link.href}
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
-                                        >
-                                            {link.name}
-                                        </a>
-                                    ) : (
-                                        <Link
-                                            key={link.name}
-                                            to={link.href}
-                                            onClick={() => setMobileMenuOpen(false)}
-                                            className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
-                                        >
-                                            {link.name}
-                                        </Link>
-                                    )
-                                ))}
+                                    {navLinks.map(link => (
+                                        link.href.startsWith('/#') ? (
+                                            <a
+                                                key={link.name}
+                                                href={link.href}
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
+                                            >
+                                                {link.name}
+                                            </a>
+                                        ) : (
+                                            <Link
+                                                key={link.name}
+                                                to={link.href}
+                                                onClick={() => setMobileMenuOpen(false)}
+                                                className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        )
+                                    ))}
                                 </div>
                                 <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
                                     <a
@@ -140,8 +138,8 @@ const Navbar: React.FC = () => {
             </motion.nav>
 
             {/* Mobile Bottom CTA Bar */}
-            <div 
-                className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-[1000] flex gap-3" 
+            <div
+                className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-[1000] flex gap-3"
                 style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
             >
                 <button
