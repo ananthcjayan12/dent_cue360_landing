@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
                     <div className="flex items-center gap-4 shrink-0 z-[1000]">
                         {/* Desktop CTA */}
                         <div className="hidden md:flex items-center gap-4">
-                            <a href="https://app.cue360.in" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-900 hover:text-dental-600 whitespace-nowrap">Login</a>
+                            <a href="https://dent.cue360.in/" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-900 hover:text-dental-600 whitespace-nowrap">Login</a>
                             <button
                                 onClick={() => goToContact('Book a Demo')}
                                 className="bg-slate-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-slate-800 hover:shadow-lg transition-all active:scale-95 whitespace-nowrap"
@@ -125,7 +125,7 @@ const Navbar: React.FC = () => {
                                 </div>
                                 <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
                                     <a
-                                        href="https://app.cue360.in"
+                                        href="https://dent.cue360.in/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-full text-center text-slate-600 py-3 font-medium hover:text-slate-900 transition-colors"
