@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
 
     const navLinks = [
         { name: 'Features', href: '/#features' },
-        { name: 'Showcase', href: '/#showcase' },
+        { name: 'ROI Calculator', href: '/#roi-calculator' },
         { name: 'Pricing', href: '/#pricing' },
     ];
 
