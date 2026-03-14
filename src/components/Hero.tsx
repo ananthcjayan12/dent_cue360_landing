@@ -42,15 +42,22 @@ const Hero: React.FC = () => {
                         </span>
                     </motion.h1>
 
-                    <motion.p
+                    <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-lg sm:text-xl text-slate-600 mb-10 leading-relaxed max-w-lg"
+                        className="mb-10 max-w-lg flex flex-col gap-1"
                     >
-                        Cut no-shows by up to <span className="text-slate-900 font-extrabold">40%</span>. Get paid faster. Know exactly where your clinic is making — and losing — money.
-                    </motion.p>
-
+                        <p className="text-lg sm:text-xl text-slate-700 leading-relaxed font-medium">
+                            <span className="text-dental-600 font-extrabold">Control No-Shows.</span>
+                        </p>
+                        <p className="text-lg sm:text-xl text-slate-700 leading-relaxed font-medium">
+                            Total <span className="text-indigo-600 font-extrabold">financial clarity.</span>
+                        </p>
+                        <p className="text-lg sm:text-xl text-slate-700 leading-relaxed font-medium">
+                            Recover lost revenue and get paid <span className="text-amber-500 font-extrabold">faster.</span>
+                        </p>
+                    </motion.div>
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
