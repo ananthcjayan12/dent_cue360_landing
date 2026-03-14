@@ -26,6 +26,8 @@ export default {
             },
             fontFamily: {
                 sans: ['Inter', 'system-ui', 'sans-serif'],
+                bricolage: ['"Bricolage Grotesque"', 'sans-serif'],
+                dmsans: ['"DM Sans"', 'sans-serif'],
             },
             letterSpacing: {
                 tighter: '-0.04em',
