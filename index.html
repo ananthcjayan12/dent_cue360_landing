@@ -26,6 +26,17 @@
     src="https://www.facebook.com/tr?id=787549303968445&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
+
+  <script>
+    window.addEventListener('scroll', function() {
+      var scrollPercent = (window.scrollY /
+        (document.body.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent >= 50 && !window._scroll50fired) {
+        window._scroll50fired = true;
+        fbq('trackCustom', 'ScrolledHalfway');
+      }
+    });
+  </script>
 </head>
 
 <body>
