@@ -29,11 +29,12 @@ const Contact: React.FC = () => {
                 mode: 'no-cors',
             });
 
-            setIsSubmitted(true);
-            // Fire Meta Pixel Lead event on successful form submission
+            // Fire Meta Pixel Lead event immediately after successful submission
             if (typeof (window as any).fbq === 'function') {
                 (window as any).fbq('track', 'Lead');
             }
+
+            setIsSubmitted(true);
             // Reset form after 3 seconds
             setTimeout(() => {
                 setIsSubmitted(false);
