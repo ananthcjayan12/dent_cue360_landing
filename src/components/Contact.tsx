@@ -30,6 +30,10 @@ const Contact: React.FC = () => {
             });
 
             setIsSubmitted(true);
+            // Fire Meta Pixel Lead event on successful form submission
+            if (typeof (window as any).fbq === 'function') {
+                (window as any).fbq('track', 'Lead');
+            }
             // Reset form after 3 seconds
             setTimeout(() => {
                 setIsSubmitted(false);
