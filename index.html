@@ -45,11 +45,16 @@
 
   <script>
     window.addEventListener('scroll', function() {
-      var scrollPercent = (window.scrollY /
-        (document.body.scrollHeight - window.innerHeight)) * 100;
+      var totalHeight = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+      ) - window.innerHeight;
+      var scrollPercent = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
       if (scrollPercent >= 50 && !window._scroll50fired) {
         window._scroll50fired = true;
-        fbq('trackCustom', 'ScrolledHalfway');
+        if (typeof fbq === 'function') {
+          fbq('trackCustom', 'ScrolledHalfway');
+        }
       }
     });
   </script>
