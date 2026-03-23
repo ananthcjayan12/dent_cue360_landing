@@ -19,7 +19,10 @@
     })(window, document, "clarity", "script", "vxomk82gpa");
   </script>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,6 +45,275 @@
     src="https://www.facebook.com/tr?id=787549303968445&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
+
+<!-- SCRIPT 1 & 2: Global Click Tracking -->
+<script>
+document.addEventListener('click', function(e) {
+  var target = e.target.closest('a, button');
+  if (!target) return;
+  var text = target.textContent.trim().toLowerCase();
+  
+  if (text.includes('book a demo') || text.includes('watch all second demo') || text.includes('second demo')) {
+    fbq('trackCustom', 'ClickedBookDemo', {
+      content_name: 'demo_request',
+      page_location: window.location.pathname
+    });
+  } else if (text.includes('start free trial') || text.includes('free trial')) {
+    fbq('trackCustom', 'ClickedFreeTrial', {
+      content_name: 'trial_cta',
+      plan: 'growth'
+    });
+  }
+});
+</script>
+
+<!-- SCRIPT 3: HighEngagementVisit -->
+<script>
+setTimeout(function() {
+  fbq('trackCustom', 'HighEngagementVisit', {
+    time_on_site: 60,
+    page: window.location.pathname
+  });
+}, 60000);
+</script>
+
+<!-- SCRIPT 4: ViewedPricing -->
+<script>
+(function() {
+  var pricingFired = false;
+  
+  function checkPricingSection() {
+    var pricingSection = document.getElementById('pricing') || document.querySelector('[id*="pricing"]');
+    if (!pricingSection) {
+      setTimeout(checkPricingSection, 1000);
+      return;
+    }
+    
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !pricingFired) {
+          pricingFired = true;
+          fbq('trackCustom', 'ViewedPricing', {
+            content_name: 'pricing_page'
+          });
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(pricingSection);
+  }
+  
+  checkPricingSection();
+})();
+</script>
+
+<!-- SCRIPT 5: ROICalculatorEngaged -->
+<script>
+(function() {
+  var roiFired = { scroll: false, interact: false };
+
+  function fireROIEvent(trigger, extra) {
+    var payload = {
+      content_name: 'roi_calculator',
+      trigger: trigger
+    };
+    if (extra) Object.assign(payload, extra);
+    fbq('trackCustom', 'ROICalculatorEngaged', payload);
+    console.log('[Cue360] ROICalculatorEngaged fired:', trigger);
+  }
+
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a');
+    if (!link) return;
+    var href = link.getAttribute('href') || '';
+    var text = link.textContent.trim().toLowerCase();
+    if (
+      href.includes('calculator') ||
+      href.includes('roi') ||
+      text.includes('calculator') ||
+      text.includes('roi')
+    ) {
+      fireROIEvent('navbar_click', { link_text: link.textContent.trim() });
+    }
+  });
+
+  function findCalcSection() {
+    var selectors = [
+      '#calculator', '#roi', '#roi-calculator',
+      '[id*="calculator"]', '[id*="roi"]',
+      '[class*="calculator"]', '[class*="roi"]'
+    ];
+    for (var i = 0; i < selectors.length; i++) {
+      var el = document.querySelector(selectors[i]);
+      if (el) return el;
+    }
+    var all = document.querySelectorAll('section, div');
+    for (var j = 0; j < all.length; j++) {
+      if (all[j].textContent.includes('no-shows are costing')) return all[j];
+    }
+    return null;
+  }
+
+  function setupScrollObserver() {
+    var section = findCalcSection();
+    if (!section) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !roiFired.scroll) {
+          roiFired.scroll = true;
+          fireROIEvent('scrolled_into_view');
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(section);
+  }
+
+  function setupInteractionListener() {
+    var section = findCalcSection();
+    if (!section) return;
+    section.addEventListener('input', function(e) {
+      if (roiFired.interact) return;
+      roiFired.interact = true;
+      fireROIEvent('calculator_interacted', {
+        element: e.target.tagName.toLowerCase(),
+        input_name: e.target.name || e.target.id || 'unknown'
+      });
+    });
+    section.addEventListener('click', function(e) {
+      var btn = e.target.closest('button, a');
+      if (!btn) return;
+      fireROIEvent('calculator_button_clicked', {
+        button_text: btn.textContent.trim()
+      });
+    });
+  }
+
+  function initROICalculator() {
+    var section = findCalcSection();
+    if (!section) {
+      setTimeout(initROICalculator, 2000);
+      return;
+    }
+    setupScrollObserver();
+    setupInteractionListener();
+  }
+
+  initROICalculator();
+})();
+</script>
+
+<!-- SCRIPT 6: Lead Form Events -->
+<script>
+(function() {
+  var PIXEL_ID = '787549303968445';
+
+  function findLeadForm() {
+    var selectors = ['form', '[class*="form"]', '[id*="form"]'];
+    for (var i = 0; i < selectors.length; i++) {
+      var els = document.querySelectorAll(selectors[i]);
+      for (var j = 0; j < els.length; j++) {
+        if (
+          els[j].textContent.toLowerCase().includes('request access') ||
+          els[j].textContent.toLowerCase().includes('upgrade your practice')
+        ) {
+          return els[j];
+        }
+      }
+    }
+    return null;
+  }
+
+  var formFired = { started: false, submitted: false };
+  var filledFields = {};
+
+  function fireFormEvent(eventName, extra) {
+    var payload = { content_name: 'lead_form' };
+    if (extra) Object.assign(payload, extra);
+    fbq('trackCustom', eventName, payload);
+    console.log('[Cue360]', eventName, payload);
+  }
+
+  function getFieldLabel(el) {
+    return el.placeholder || el.name || el.id || el.type || 'unknown';
+  }
+
+  function setupFormTracking() {
+    var form = findLeadForm();
+    if (!form) {
+      setTimeout(setupFormTracking, 2000);
+      return;
+    }
+    console.log('[Cue360] Lead form found — tracking active.');
+
+    form.addEventListener('input', function(e) {
+      var label = getFieldLabel(e.target);
+      filledFields[label] = e.target.value;
+      if (!formFired.started) {
+        formFired.started = true;
+        fireFormEvent('LeadFormStarted', { first_field: label });
+      }
+    });
+
+    var submitBtns = Array.from(
+      form.querySelectorAll('button[type="submit"], button, input[type="submit"], [class*="submit"], [class*="request"]')
+    );
+    document.querySelectorAll('button, a').forEach(function(btn) {
+      if (btn.textContent.trim().toLowerCase().includes('request access')) {
+        submitBtns.push(btn);
+      }
+    });
+
+    submitBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (formFired.submitted) return;
+        formFired.submitted = true;
+        var inputs = form.querySelectorAll('input, textarea, select');
+        var filled = 0;
+        inputs.forEach(function(inp) {
+          if (inp.value && inp.value.trim().length > 0) filled++;
+        });
+        fireFormEvent('LeadFormSubmitted', {
+          fields_filled: filled,
+          total_fields: inputs.length
+        });
+        fbq('track', 'Lead');
+        console.log('[Cue360] Standard Lead event fired');
+      });
+    });
+
+    window.addEventListener('beforeunload', function() {
+      if (formFired.started && !formFired.submitted) {
+        var inputs = form.querySelectorAll('input, textarea, select');
+        var filled = 0;
+        inputs.forEach(function(inp) {
+          if (inp.value && inp.value.trim().length > 0) filled++;
+        });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(
+            'https://www.facebook.com/tr?' +
+            'id=' + PIXEL_ID +
+            '&ev=LeadFormAbandoned' +
+            '&cd[content_name]=lead_form' +
+            '&cd[fields_filled]=' + filled +
+            '&noscript=1',
+            ''
+          );
+        }
+        try {
+          fbq('trackCustom', 'LeadFormAbandoned', {
+            content_name: 'lead_form',
+            fields_filled: filled,
+            total_fields: inputs.length
+          });
+        } catch(e) {}
+      }
+    });
+  }
+
+  setupFormTracking();
+})();
+</script>
 
   <script>
     window.addEventListener('scroll', function() {
