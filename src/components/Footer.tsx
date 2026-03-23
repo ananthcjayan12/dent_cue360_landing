@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-16">
                     <div>
                         <h3 className="text-2xl font-bold text-slate-900 mb-2">Ready to modernize?</h3>
-                        <p className="text-slate-500">Join 500+ clinics running on Dent.Cue360.</p>
+                        <p className="text-slate-500">Join 500+ Clinics Running on Cue360</p>
                     </div>
                     <div className="flex gap-4">
                         <button
