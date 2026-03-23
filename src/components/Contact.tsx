@@ -53,7 +53,7 @@ const Contact: React.FC = () => {
             <div className="max-w-2xl mx-auto px-6 text-center">
                 <h2 className="text-3xl font-bold text-slate-900 mb-4">Ready to upgrade your practice?</h2>
                 <p className="text-slate-500 mb-8 max-w-sm mx-auto">
-                    Get started with Dent.Cue360 today.
+                    Get Started with Cue360 Today
                     <br className="hidden md:block" /> No credit card required.
                 </p>
 
