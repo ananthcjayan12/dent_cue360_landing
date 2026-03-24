@@ -15,7 +15,7 @@ const ROICalculator: React.FC = () => {
     const calculateROI = () => {
         // Multiply by chairs to reflect total clinic volume
         const monthlyLoss = noShows * chairs * avgValue * 4.33;
-        const planCost = 16999;
+        const planCost = 16999 / 12;
         const recovery = monthlyLoss * 0.40;
         const netGain = recovery - planCost;
         const annualNetGain = netGain * 12;

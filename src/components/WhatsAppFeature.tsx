@@ -1,7 +1,9 @@
 import React from 'react';
 import { TrendingDown, Bot, ArrowRight } from 'lucide-react';
+import { useNavigateToContact } from '../hooks/useNavigateToContact';
 
 const WhatsAppFeature: React.FC = () => {
+    const goToContact = useNavigateToContact();
     return (
         <section id="whatsapp-feature-section" className="py-24 bg-[#F0FBF5] overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 relative">
@@ -56,10 +58,13 @@ const WhatsAppFeature: React.FC = () => {
                             </div>
                         </div>
 
-                        <a href="#demo" className="inline-flex items-center gap-2 text-[#00A884] font-bold hover:text-[#068a6d] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00A884] focus:ring-offset-2 rounded-md px-1">
+                        <button 
+                            onClick={() => goToContact('WhatsApp Demo Requested')} 
+                            className="inline-flex items-center gap-2 text-[#00A884] font-bold hover:text-[#068a6d] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00A884] focus:ring-offset-2 rounded-md px-1"
+                        >
                             See how it works
                             <ArrowRight className="w-5 h-5" />
-                        </a>
+                        </button>
                     </div>
 
                     {/* Right Column - Phone Mockup */}
