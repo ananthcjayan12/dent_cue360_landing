@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
                     </div>
                     <div className="flex gap-4">
                         <button
-                            onClick={() => goToContact('Get Started with Dent.Cue360')}
+                            onClick={() => goToContact('Get Started with Cue360')}
                             className="px-6 py-3 bg-slate-900 text-white rounded-xl font-semibold hover:bg-slate-800 transition-colors"
                         >
                             Get Started
