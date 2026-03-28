@@ -21,7 +21,7 @@ const Pricing: React.FC = () => {
                         <h3 className="text-lg font-bold text-slate-900 mb-2">Essential</h3>
                         <div className="mb-2 flex items-baseline gap-1">
                             <span className="text-3xl font-bold text-slate-900">₹10,999</span>
-                            <span className="text-slate-500 text-xs font-medium">/month</span>
+                            <span className="text-slate-500 text-xs font-medium">/year</span>
                         </div>
                         <p className="text-sm italic text-teal-600 mb-6 font-medium">Less than ₹365 per day</p>
                         <ul className="space-y-4 mb-8 flex-grow">
@@ -50,7 +50,7 @@ const Pricing: React.FC = () => {
                         <h3 className="text-lg font-bold mb-2 text-white">Growth</h3>
                         <div className="mb-2 flex items-baseline gap-1">
                             <span className="text-3xl font-bold">₹16,999</span>
-                            <span className="text-slate-400 text-xs font-medium">/month</span>
+                            <span className="text-slate-400 text-xs font-medium">/year</span>
                         </div>
                         <p className="text-sm italic text-teal-400 mb-6 font-medium">Pays for itself with just 2 recovered no-shows per week</p>
                         <ul className="space-y-4 mb-8 flex-grow">
@@ -73,7 +73,7 @@ const Pricing: React.FC = () => {
                         <h3 className="text-lg font-bold text-slate-900 mb-2">Empire</h3>
                         <div className="mb-2 flex items-baseline gap-1">
                             <span className="text-3xl font-bold text-slate-900">₹26,999</span>
-                            <span className="text-slate-500 text-xs font-medium">/month</span>
+                            <span className="text-slate-500 text-xs font-medium">/year</span>
                         </div>
                         <p className="text-sm italic text-teal-600 mb-6 font-medium">Full multi-clinic control from one screen</p>
                         <ul className="space-y-4 mb-8 flex-grow">
