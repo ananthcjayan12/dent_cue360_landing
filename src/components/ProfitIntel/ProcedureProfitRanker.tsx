@@ -85,7 +85,7 @@ const ProcedureProfitRanker: React.FC = () => {
     }
 
     return (
-        <section id="procedure-profit" className="scroll-mt-32">
+        <section id="procedure-profit" data-tool-section="procedure_profit_ranker" className="scroll-mt-32">
             <div className="mb-10 text-center md:text-left">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-[#0D1B2A] tracking-tight mb-3">Procedure Profit Ranker</h2>
                 <p className="text-xl text-slate-500">You work hard all day. But are you filling your chair with the right work?</p>
@@ -144,7 +144,7 @@ const ProcedureProfitRanker: React.FC = () => {
                 </div>
 
                 {/* Results Area */}
-                <div className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 md:p-8 relative overflow-hidden">
+                <div data-tool-result="procedure_profit_ranker" className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 md:p-8 relative overflow-hidden">
                     {!hasRanked ? (
                         <div className="h-full min-h-[300px] flex flex-col items-center justify-center text-center px-4">
                             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-500">
@@ -158,7 +158,7 @@ const ProcedureProfitRanker: React.FC = () => {
                         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-xl font-extrabold text-[#0D1B2A]">Hourly Revenue Ranking</h3>
-                                <button onClick={handleShare} className="group text-sm font-bold text-[#4B6EF5] bg-white hover:bg-gradient-to-r hover:from-[#4B6EF5] hover:to-indigo-600 hover:text-white border-2 border-blue-100 hover:border-transparent px-4 py-2 rounded-xl shadow-sm hover:shadow-md transition-all flex items-center gap-2">
+                                <button onClick={handleShare} data-share-tool="procedure_profit_ranker" className="group text-sm font-bold text-[#4B6EF5] bg-white hover:bg-gradient-to-r hover:from-[#4B6EF5] hover:to-indigo-600 hover:text-white border-2 border-blue-100 hover:border-transparent px-4 py-2 rounded-xl shadow-sm hover:shadow-md transition-all flex items-center gap-2">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 group-hover:scale-110 transition-transform"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                                     Share This Insight
                                 </button>
@@ -205,8 +205,8 @@ const ProcedureProfitRanker: React.FC = () => {
                         <p className="text-slate-500">Know which procedures to prioritise. See your real revenue mix in your Practice Intel dashboard.</p>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-                        <button onClick={() => goToContact('Book a Demo - Procedure Ranker')} className="text-slate-600 font-semibold hover:text-blue-600 transition-colors px-4 py-2">Book a Demo Instead</button>
-                        <button onClick={() => goToContact('Start Free Trial - Procedure Ranker')} className="bg-[#4B6EF5] text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-600 shadow-md shadow-blue-500/20 transform hover:-translate-y-0.5 transition-all w-full sm:w-auto">Start Free 14-Day Trial</button>
+                        <button onClick={() => goToContact('Book a Demo - Procedure Ranker')} data-cta="demo" data-cta-tool="procedure_profit_ranker" className="text-slate-600 font-semibold hover:text-blue-600 transition-colors px-4 py-2">Book a Demo Instead</button>
+                        <button onClick={() => goToContact('Start Free Trial - Procedure Ranker')} data-cta="trial" data-cta-tool="procedure_profit_ranker" className="bg-[#4B6EF5] text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-600 shadow-md shadow-blue-500/20 transform hover:-translate-y-0.5 transition-all w-full sm:w-auto">Start Free 14-Day Trial</button>
                     </div>
                 </div>
             )}
