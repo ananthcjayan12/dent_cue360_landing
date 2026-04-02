@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigateToContact } from '../hooks/useNavigateToContact';
 
 const ROICalculator: React.FC = () => {
@@ -173,6 +174,25 @@ const ROICalculator: React.FC = () => {
                         * Recovery assumption: 40%. Estimates based on average reduction.
                     </p>
 
+                    <div className="mt-10 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 shadow-inner group">
+                        <Link to="/clinic-profit-intelligence" className="block p-6 md:p-8 hover:bg-blue-100/50 transition-colors">
+                            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                                <div className="text-center md:text-left">
+                                    <h4 className="text-lg md:text-xl font-bold text-slate-800 mb-1">
+                                        Curious how else your clinic might be losing money?
+                                    </h4>
+                                    <p className="text-sm text-slate-600 font-medium">
+                                        Try our <span className="font-bold text-[#4B6EF5]">Free Profit Calculators</span> to find hidden leaks.
+                                    </p>
+                                </div>
+                                <div className="shrink-0">
+                                    <span className="inline-flex items-center justify-center bg-white text-[#4B6EF5] font-bold text-sm px-6 py-3 rounded-xl shadow-sm border border-slate-200 group-hover:shadow-md group-hover:scale-[1.02] transition-all">
+                                        Calculate Profit <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </section>
