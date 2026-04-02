@@ -38,7 +38,7 @@ const StaffCostPerPatient: React.FC = () => {
     };
 
     return (
-        <section id="staff-cost" className="scroll-mt-32">
+        <section id="staff-cost" data-tool-section="staff_cost_per_patient" className="scroll-mt-32">
             <div className="mb-10 text-center md:text-left">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-[#0D1B2A] tracking-tight mb-3">Staff Cost Per Patient</h2>
                 <p className="text-xl text-slate-500">Your staff cost is fixed. Your patients are not. That gap is costing you.</p>
@@ -115,10 +115,10 @@ const StaffCostPerPatient: React.FC = () => {
                 </div>
 
                 {/* Results Area */}
-                <div className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-center">
+                <div data-tool-result="staff_cost_per_patient" className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-center">
                     <div className="flex justify-between items-center mb-8">
                         <h3 className="text-xl font-extrabold text-[#0D1B2A]">Staff Efficiency Impact</h3>
-                        <button onClick={handleShare} className="group text-sm font-bold text-[#4B6EF5] bg-white hover:bg-gradient-to-r hover:from-[#4B6EF5] hover:to-indigo-600 hover:text-white border-2 border-blue-100 hover:border-transparent px-4 py-2 rounded-xl shadow-sm hover:shadow-md transition-all flex items-center gap-2">
+                        <button onClick={handleShare} data-share-tool="staff_cost_per_patient" className="group text-sm font-bold text-[#4B6EF5] bg-white hover:bg-gradient-to-r hover:from-[#4B6EF5] hover:to-indigo-600 hover:text-white border-2 border-blue-100 hover:border-transparent px-4 py-2 rounded-xl shadow-sm hover:shadow-md transition-all flex items-center gap-2">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 group-hover:scale-110 transition-transform"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                             Share This Insight
                         </button>
@@ -167,8 +167,8 @@ const StaffCostPerPatient: React.FC = () => {
                     <p className="text-slate-600">Fewer empty chairs means your staff cost per patient drops. Every week, automatically.</p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-                    <button onClick={() => goToContact('See How Reminders Work - Staff Cost')} className="text-slate-600 font-semibold hover:text-[#4B6EF5] transition-colors px-4 py-2">See How Reminders Work</button>
-                    <button onClick={() => goToContact('Start Free Trial - Staff Cost')} className="bg-[#4B6EF5] text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-600 shadow-md shadow-blue-500/20 transform hover:-translate-y-0.5 transition-all w-full sm:w-auto">Start Free 14-Day Trial</button>
+                    <button onClick={() => goToContact('See How Reminders Work - Staff Cost')} data-cta="demo" data-cta-tool="staff_cost_per_patient" className="text-slate-600 font-semibold hover:text-[#4B6EF5] transition-colors px-4 py-2">See How Reminders Work</button>
+                    <button onClick={() => goToContact('Start Free Trial - Staff Cost')} data-cta="trial" data-cta-tool="staff_cost_per_patient" className="bg-[#4B6EF5] text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-600 shadow-md shadow-blue-500/20 transform hover:-translate-y-0.5 transition-all w-full sm:w-auto">Start Free 14-Day Trial</button>
                 </div>
             </div>
         </section>

@@ -58,7 +58,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Procedure Profit */}
-                        <a href="#procedure-profit" className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden">
+                        <a href="#procedure-profit" data-tool-card="procedure_profit_ranker" className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden">
                             <div className="absolute -right-8 -bottom-8 text-[120px] font-extrabold text-slate-50/80 group-hover:text-blue-50/50 transition-colors leading-none tracking-tighter pointer-events-none">01</div>
                             <span className="bg-blue-100 text-blue-700 font-extrabold text-xs px-3 py-1 rounded-full mb-4">60 SECONDS</span>
                             <h3 className="text-2xl font-bold text-[#0D1B2A] mb-3 group-hover:text-blue-600 transition-colors">Procedure Profit Ranker</h3>
@@ -69,7 +69,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                         </a>
 
                         {/* Staff Cost */}
-                        <a href="#staff-cost" className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden">
+                        <a href="#staff-cost" data-tool-card="staff_cost_per_patient" className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden">
                             <div className="absolute -right-8 -bottom-8 text-[120px] font-extrabold text-slate-50/80 group-hover:text-blue-50/50 transition-colors leading-none tracking-tighter pointer-events-none">02</div>
                             <span className="bg-blue-100 text-blue-700 font-extrabold text-xs px-3 py-1 rounded-full mb-4">60 SECONDS</span>
                             <h3 className="text-2xl font-bold text-[#0D1B2A] mb-3 group-hover:text-blue-600 transition-colors">Staff Cost Per Patient</h3>
@@ -80,7 +80,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                         </a>
 
                         {/* Dead Hours */}
-                        <a href="#dead-hours" className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden">
+                        <a href="#dead-hours" data-tool-card="dead_hours_detector" className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden">
                             <div className="absolute -right-8 -bottom-8 text-[120px] font-extrabold text-slate-50/80 group-hover:text-blue-50/50 transition-colors leading-none tracking-tighter pointer-events-none">03</div>
                             <span className="bg-blue-100 text-blue-700 font-extrabold text-xs px-3 py-1 rounded-full mb-4">60 SECONDS</span>
                             <h3 className="text-2xl font-bold text-[#0D1B2A] mb-3 group-hover:text-blue-600 transition-colors">Dead Hours Detector</h3>
@@ -91,7 +91,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                         </a>
 
                         {/* Recall Revenue */}
-                        <a href="#recall-revenue" className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden">
+                        <a href="#recall-revenue" data-tool-card="recall_revenue_leak" className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden">
                             <div className="absolute -right-8 -bottom-8 text-[120px] font-extrabold text-slate-50/80 group-hover:text-blue-50/50 transition-colors leading-none tracking-tighter pointer-events-none">04</div>
                             <span className="bg-blue-100 text-blue-700 font-extrabold text-xs px-3 py-1 rounded-full mb-4">60 SECONDS</span>
                             <h3 className="text-2xl font-bold text-[#0D1B2A] mb-3 group-hover:text-blue-600 transition-colors">Recall Revenue Leak</h3>
@@ -136,7 +136,7 @@ const ClinicProfitIntelligence: React.FC = () => {
             </div>
 
             {/* Bottom Journey Close */}
-            <section className="bg-[#0D1B2A] py-24 px-6 text-center">
+            <section data-section="closing-cta" className="bg-[#0D1B2A] py-24 px-6 text-center">
                 <div className="max-w-[900px] mx-auto">
                     <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-6">You have now seen the full picture.</h2>
                     <p className="text-xl text-slate-300 mb-16 leading-relaxed">
@@ -147,10 +147,11 @@ const ClinicProfitIntelligence: React.FC = () => {
                         <button 
                             onClick={() => goToContact('Start Free Trial - Profit Intel')}
                             className="bg-[#4B6EF5] text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(75,110,245,0.4)] transition-all transform hover:-translate-y-1 w-full max-w-md"
+                            data-cta="trial" data-cta-tool="closing_section"
                         >
                             Start Your Free 14-Day Trial — No Credit Card Required
                         </button>
-                        <p className="text-slate-400 font-medium">Or talk to us: <button onClick={() => goToContact('Book a Demo - Profit Intel')} className="text-white underline hover:text-blue-300">Book a 15-minute demo</button></p>
+                        <p className="text-slate-400 font-medium">Or talk to us: <button onClick={() => goToContact('Book a Demo - Profit Intel')} className="text-white underline hover:text-blue-300" data-cta="demo" data-cta-tool="closing_section">Book a 15-minute demo</button></p>
                     </div>
                 </div>
             </section>
@@ -161,7 +162,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                     <h3 className="text-3xl font-extrabold text-[#0D1B2A] mb-10 text-center">Frequently Asked Questions</h3>
                     <div className="space-y-4">
                         <details className="group bg-white rounded-xl border border-slate-200 [&_summary::-webkit-details-marker]:hidden">
-                            <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
+                            <summary data-faq-item="are_these_tools_free" className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
                                 Are these tools free to use?
                                 <span className="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
@@ -173,7 +174,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                         </details>
                         
                         <details className="group bg-white rounded-xl border border-slate-200 [&_summary::-webkit-details-marker]:hidden">
-                            <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
+                            <summary data-faq-item="is_data_saved" className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
                                 Is my data saved or shared?
                                 <span className="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
@@ -185,7 +186,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                         </details>
                         
                         <details className="group bg-white rounded-xl border border-slate-200 [&_summary::-webkit-details-marker]:hidden">
-                            <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
+                            <summary data-faq-item="how_accurate" className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
                                 How accurate are the calculations?
                                 <span className="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
@@ -197,7 +198,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                         </details>
 
                         <details className="group bg-white rounded-xl border border-slate-200 [&_summary::-webkit-details-marker]:hidden">
-                            <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
+                            <summary data-faq-item="need_cue360_account" className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
                                 Do I need to be a Cue360 user to use these tools?
                                 <span className="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
@@ -209,7 +210,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                         </details>
 
                         <details className="group bg-white rounded-xl border border-slate-200 [&_summary::-webkit-details-marker]:hidden">
-                            <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
+                            <summary data-faq-item="what_is_chair_utilisation" className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
                                 What is chair utilisation and why does it matter?
                                 <span className="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
@@ -221,7 +222,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                         </details>
 
                         <details className="group bg-white rounded-xl border border-slate-200 [&_summary::-webkit-details-marker]:hidden">
-                            <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
+                            <summary data-faq-item="how_cue360_fixes_this" className="flex items-center justify-between p-6 cursor-pointer font-bold text-lg text-slate-800">
                                 How does Cue360 help fix the problems these tools reveal?
                                 <span className="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
