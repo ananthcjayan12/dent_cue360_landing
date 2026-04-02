@@ -4,6 +4,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ClinicProfitIntelligence from './components/ClinicProfitIntelligence';
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             <div className="min-h-screen bg-white font-sans selection:bg-dental-200 selection:text-dental-900">
                 <Routes>
                     <Route path="/" element={<Landing />} />
+                    <Route path="/clinic-profit-intelligence" element={<ClinicProfitIntelligence />} />
                     <Route path="/privacy" element={
                         <>
                             <Navbar />

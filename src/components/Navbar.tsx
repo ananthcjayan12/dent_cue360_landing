@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
     const navLinks = [
         { name: 'Features', href: '/#features' },
         { name: 'ROI Calculator', href: '/#roi-calculator' },
+        { name: 'Profit Calculators', href: '/clinic-profit-intelligence', isNew: true },
         { name: 'Pricing', href: '/#pricing' },
     ];
 
@@ -47,12 +48,14 @@ const Navbar: React.FC = () => {
                     <div className="hidden md:flex items-center justify-center gap-6 xl:gap-10 absolute left-1/2 -translate-x-1/2">
                         {navLinks.map(link => (
                             link.href.startsWith('/#') ? (
-                                <a key={link.name} href={link.href} className="text-sm font-medium text-slate-600 hover:text-dental-600 transition-colors whitespace-nowrap">
+                                <a key={link.name} href={link.href} className="text-sm font-semibold text-slate-900 hover:text-dental-600 transition-colors whitespace-nowrap flex items-center gap-1.5">
                                     {link.name}
+                                    {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider shadow-sm">New</span>}
                                 </a>
                             ) : (
-                                <Link key={link.name} to={link.href} className="text-sm font-medium text-slate-500 hover:text-dental-600 transition-colors whitespace-nowrap">
+                                <Link key={link.name} to={link.href} className="text-sm font-semibold text-slate-900 hover:text-dental-600 transition-colors whitespace-nowrap flex items-center gap-1.5">
                                     {link.name}
+                                    {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider shadow-sm">New</span>}
                                 </Link>
                             )
                         ))}
@@ -105,18 +108,20 @@ const Navbar: React.FC = () => {
                                                 key={link.name}
                                                 href={link.href}
                                                 onClick={() => setMobileMenuOpen(false)}
-                                                className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
+                                                className="flex items-center gap-2 text-slate-900 font-bold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
                                             >
                                                 {link.name}
+                                                {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider ml-auto">New</span>}
                                             </a>
                                         ) : (
                                             <Link
                                                 key={link.name}
                                                 to={link.href}
                                                 onClick={() => setMobileMenuOpen(false)}
-                                                className="block text-slate-700 font-semibold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
+                                                className="flex items-center gap-2 text-slate-900 font-bold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
                                             >
                                                 {link.name}
+                                                {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider ml-auto">New</span>}
                                             </Link>
                                         )
                                     ))}
