@@ -43,10 +43,10 @@ const Navbar: React.FC = () => {
 
     const navLinks: { name: string, href: string, isNew?: boolean, isPro?: boolean }[] = [
         { name: 'Features', href: '/#features' },
+        { name: 'Pricing', href: '/#pricing' },
         { name: 'ROI Calculator', href: '/#roi-calculator' },
         { name: 'Profit Calculators', href: '/clinic-profit-intelligence', isNew: true },
         { name: 'Practice Hub', href: '/dental-toolkit', isPro: true },
-        { name: 'Pricing', href: '/#pricing' },
     ];
 
     return (
