@@ -125,8 +125,13 @@ const Hero: React.FC = () => {
                     <div className="transform transition-all duration-500 hover:-translate-y-2 hover:scale-[1.01] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] rounded-2xl border border-slate-200/50 bg-white overflow-hidden z-10">
                         <img
                             src="/dashboard-stats.png"
-                            alt="Dent.Cue360 Dashboard"
+                            alt="Cue360 Dental Clinic Dashboard — Real-time appointments, billing, and profit tracking"
                             className="w-full h-auto object-cover"
+                            width={1200}
+                            height={675}
+                            loading="eager"
+                            decoding="async"
+                            fetchPriority="high"
                         />
                     </div>
                     {/* Glow effect behind */}

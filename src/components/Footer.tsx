@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
 
                 <div className="border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
                     <div className="flex items-center gap-2 mb-4 md:mb-0">
-                        <img src="/logo.png" alt="Cue360 Logo" className="h-14 md:h-16 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                        <img src="/logo.png" alt="Cue360 Logo" className="h-14 md:h-16 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" width={128} height={64} loading="lazy" decoding="async" />
                     </div>
                     <div className="flex items-center gap-8">
                         <Link to="/privacy" className="hover:text-slate-900 transition-colors">Privacy</Link>

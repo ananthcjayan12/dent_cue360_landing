@@ -9,9 +9,13 @@ export const useNavigateToContact = () => {
 
     return (intent: string) => {
         navigate(`/?intent=${encodeURIComponent(intent)}`, { replace: false });
-        // Scroll after React has had a tick to (re-)render the contact section
+        
+        // Wait longer for the React DOM tree to fully switch routes, construct the landing page, and mount the contact section
         setTimeout(() => {
-            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-        }, 80);
+            const el = document.getElementById('contact');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 300);
     };
 };

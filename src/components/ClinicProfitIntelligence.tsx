@@ -5,6 +5,7 @@ import ProcedureProfitRanker from './ProfitIntel/ProcedureProfitRanker';
 import StaffCostPerPatient from './ProfitIntel/StaffCostPerPatient';
 import DeadHoursDetector from './ProfitIntel/DeadHoursDetector';
 import RecallRevenueLeak from './ProfitIntel/RecallRevenueLeak';
+import PatientBreakEven from './ProfitIntel/PatientBreakEven';
 import { useNavigateToContact } from '../hooks/useNavigateToContact';
 
 const ClinicProfitIntelligence: React.FC = () => {
@@ -12,6 +13,82 @@ const ClinicProfitIntelligence: React.FC = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+
+        // Dynamic SEO Meta
+        document.title = "Free Clinic Profit Calculators — Find Hidden Revenue Leaks | Cue360";
+        let metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+            metaDescription.setAttribute('content', "Free diagnostic tools to find where your dental clinic is losing money. Calculate procedure profit, staff cost per patient, dead hours, recall revenue leak, and break-even point. No login required.");
+        }
+
+        // Set canonical URL
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+            canonical.setAttribute('href', 'https://cue360.in/clinic-profit-intelligence');
+        }
+
+        // Set OG URL
+        let ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) {
+            ogUrl.setAttribute('content', 'https://cue360.in/clinic-profit-intelligence');
+        }
+
+        // FAQPage structured data
+        const faqData = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Are these profit calculator tools free to use?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, completely free. You can use them as often as you like to check the financial health of your clinic."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is my data saved or shared?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No. All calculations happen entirely in your browser. We do not save, track, or share the numbers you enter into these calculators."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How accurate are the calculations?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The tools use standard business logic and averages derived from the Indian Dental Association (IDA) surveys. However, they are diagnostic estimations, not formal accounting tools."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What is chair utilisation and why does it matter?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Chair utilisation is the percentage of your clinic's open hours that a patient is actually seated and generating revenue. Since most of your costs are fixed, low utilisation directly eats your profit margin."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does Cue360 help fix the problems these tools reveal?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Cue360 automates WhatsApp reminders to cut no-shows, provides a unified calendar to fill dead hours, runs automated patient recall sequences, and gives you a dashboard that tracks your real-time procedure revenue mix."
+                    }
+                }
+            ]
+        };
+
+        const script = document.createElement('script');
+        script.type = "application/ld+json";
+        script.innerHTML = JSON.stringify(faqData);
+        document.head.appendChild(script);
+
+        return () => {
+            document.head.removeChild(script);
+        };
     }, []);
 
     return (
@@ -45,6 +122,7 @@ const ClinicProfitIntelligence: React.FC = () => {
                     <a href="#staff-cost" className="whitespace-nowrap text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-2"><span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10px]">2</span> Staff Cost</a>
                     <a href="#dead-hours" className="whitespace-nowrap text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-2"><span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10px]">3</span> Dead Hours</a>
                     <a href="#recall-revenue" className="whitespace-nowrap text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-2"><span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10px]">4</span> Recall Leak</a>
+                    <a href="#break-even" className="whitespace-nowrap text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-2"><span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10px]">5</span> Break-Even Limit</a>
                 </div>
             </div>
 
@@ -100,6 +178,17 @@ const ClinicProfitIntelligence: React.FC = () => {
                                 Use This Tool <svg fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
                             </div>
                         </a>
+
+                        {/* Break Even */}
+                        <a href="#break-even" data-tool-card="patient_break_even" className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden md:col-span-2 lg:col-span-1">
+                            <div className="absolute -right-8 -bottom-8 text-[120px] font-extrabold text-slate-50/80 group-hover:text-blue-50/50 transition-colors leading-none tracking-tighter pointer-events-none">05</div>
+                            <span className="bg-blue-100 text-blue-700 font-extrabold text-xs px-3 py-1 rounded-full mb-4">60 SECONDS</span>
+                            <h3 className="text-2xl font-bold text-[#0D1B2A] mb-3 group-hover:text-blue-600 transition-colors">New Patient Break-Even Limit</h3>
+                            <p className="text-slate-600 mb-8 relative z-10 leading-relaxed">Discover exactly how many patients per day you need to process just to cover your fixed burn rate and survive the month.</p>
+                            <div className="mt-auto flex items-center gap-2 text-blue-600 font-bold">
+                                Use This Tool <svg fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -127,10 +216,17 @@ const ClinicProfitIntelligence: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="w-full bg-slate-50 relative py-20">
+                <div className="w-full bg-slate-50 relative py-20 border-b border-slate-100">
                     <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-100/50 rounded-full blur-[100px] pointer-events-none opacity-50"></div>
                     <div className="max-w-[1100px] mx-auto px-6 relative z-10">
                         <RecallRevenueLeak />
+                    </div>
+                </div>
+
+                <div className="w-full bg-white relative py-20">
+                    <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-emerald-50/60 rounded-full blur-[100px] pointer-events-none -translate-y-1/2"></div>
+                    <div className="max-w-[1100px] mx-auto px-6 relative z-10">
+                        <PatientBreakEven />
                     </div>
                 </div>
             </div>
