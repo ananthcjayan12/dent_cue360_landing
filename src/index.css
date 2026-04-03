@@ -52,4 +52,42 @@
         pointer-events: none;
         z-index: 50;
     }
+
+    /* Scroll-hint: show a visible scrollbar until the user scrolls */
+    .scroll-hint-visible::-webkit-scrollbar {
+        width: 8px;
+    }
+    .scroll-hint-visible::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .scroll-hint-visible::-webkit-scrollbar-thumb {
+        background: rgba(75, 110, 245, 0.35);
+        border-radius: 999px;
+        animation: scroll-hint-fade 3s ease-in-out infinite alternate;
+    }
+    /* Firefox */
+    .scroll-hint-visible {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(75, 110, 245, 0.35) transparent;
+    }
+}
+
+/* Global keyframes (outside @layer so Tailwind JIT can reference them) */
+@keyframes scroll-hint-fade {
+    0%   { opacity: 0.3; }
+    100% { opacity: 0.8; }
+}
+
+@keyframes scenario-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(75, 110, 245, 0); }
+    50%      { box-shadow: 0 0 0 6px rgba(75, 110, 245, 0.25); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.3s ease-out;
 }

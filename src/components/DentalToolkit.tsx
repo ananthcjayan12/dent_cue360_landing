@@ -224,9 +224,9 @@ const DentalToolkit: React.FC = () => {
                          <a href="#tooth-chart" onClick={(e) => scrollToTool(e, 'tooth-chart')} className="group bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:-translate-y-1 hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col items-start relative overflow-hidden">
                             <div className="absolute -right-8 -bottom-8 text-[120px] font-extrabold text-slate-50/80 group-hover:text-blue-50/50 transition-colors leading-none tracking-tighter pointer-events-none">02</div>
                             <h3 className="text-2xl font-bold text-[#0D1B2A] mb-3 group-hover:text-blue-600 transition-colors flex items-center gap-3">
-                               <Grid className="w-6 h-6 text-[#4B6EF5]" /> Interactive Tooth Chart
+                               <Grid className="w-6 h-6 text-[#4B6EF5]" /> Dental Chart Master
                             </h3>
-                            <p className="text-slate-600 mb-8 relative z-10 leading-relaxed max-w-sm">Click any tooth to instantly cross-reference its name and quadrant in both FDI and Universal notation systems. Perfect for academic reviews.</p>
+                            <p className="text-slate-600 mb-8 relative z-10 leading-relaxed max-w-sm">The most complete free dental charting tool for BDS students and dentists. Practice tooth identification and patient charting.</p>
                             <div className="mt-auto flex items-center gap-2 text-blue-600 font-bold">
                                 Use This Tool <svg fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
                             </div>
@@ -268,9 +268,16 @@ const DentalToolkit: React.FC = () => {
             <section className="px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto py-16 md:py-24">
                 <div className="mb-12 text-center md:text-left">
                     <h2 className="text-3xl font-extrabold text-[#0D1B2A] mb-4">About These Tools</h2>
-                    <p className="text-slate-600 leading-relaxed text-lg">
+                    <p className="text-slate-600 leading-relaxed text-lg mb-6">
                         These tools are built and maintained by Cue360 — a dental clinic management platform built for Indian practices. All calculations are browser-based. We do not store any data you enter into these tools.
                     </p>
+                    <div className="flex flex-wrap gap-4 text-sm font-bold pb-4">
+                        <Link to="/dental-invoice-generator" className="text-[#4B6EF5] hover:underline">Dental Invoice Generator</Link>
+                        <span className="text-slate-300">•</span>
+                        <Link to="/#roi" className="text-[#4B6EF5] hover:underline">New Patient Break-Even Calculator</Link>
+                        <span className="text-slate-300">•</span>
+                        <Link to="/clinic-profit-intelligence" className="text-[#4B6EF5] hover:underline">Clinic Profit Intelligence</Link>
+                    </div>
                 </div>
 
                 <div className="space-y-4">
