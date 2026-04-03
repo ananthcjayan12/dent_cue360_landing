@@ -15,10 +15,13 @@ const TermsOfService = lazy(() => import('./components/TermsOfService'));
 // Scroll to top on route change — fixes the issue where navigating between pages
 // leaves the user stranded at the bottom of the previous page
 function ScrollToTop() {
-    const { pathname } = useLocation();
+    const { pathname, hash } = useLocation();
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+        // Don't scroll to top if navigating to a hash section (e.g. /#pricing)
+        if (!hash) {
+            window.scrollTo(0, 0);
+        }
+    }, [pathname, hash]);
     return null;
 }
 

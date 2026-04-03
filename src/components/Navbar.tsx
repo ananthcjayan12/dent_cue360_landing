@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useNavigateToContact } from '../hooks/useNavigateToContact';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -8,6 +8,30 @@ const Navbar: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const goToContact = useNavigateToContact();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    /** Navigate to a homepage section (e.g. /#pricing) from any page */
+    const scrollToSection = useCallback((e: React.MouseEvent, href: string) => {
+        e.preventDefault();
+        const sectionId = href.replace('/#', '');
+
+        const doScroll = () => {
+            const el = document.getElementById(sectionId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        if (location.pathname === '/') {
+            // Already on homepage — just scroll
+            doScroll();
+        } else {
+            // Navigate to homepage first, then scroll after DOM mounts
+            navigate('/');
+            setTimeout(doScroll, 400);
+        }
+    }, [location.pathname, navigate]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -49,7 +73,7 @@ const Navbar: React.FC = () => {
                     <div className="hidden lg:flex flex-1 items-center justify-center gap-4 xl:gap-10 px-4 min-w-0">
                         {navLinks.map(link => (
                             link.href.startsWith('/#') ? (
-                                <a key={link.name} href={link.href} className="text-sm font-semibold text-slate-900 hover:text-dental-600 transition-colors whitespace-nowrap flex items-center gap-1.5">
+                                <a key={link.name} href={link.href} onClick={(e) => scrollToSection(e, link.href)} className="text-sm font-semibold text-slate-900 hover:text-dental-600 transition-colors whitespace-nowrap flex items-center gap-1.5 cursor-pointer">
                                     {link.name}
                                     {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider shadow-sm">New</span>}
                                     {link.isPro && <span className="px-1.5 py-px rounded-full bg-cyan-50 text-cyan-600 border border-cyan-200/60 text-[8px] font-bold uppercase tracking-wider">Pro</span>}
@@ -110,8 +134,8 @@ const Navbar: React.FC = () => {
                                             <a
                                                 key={link.name}
                                                 href={link.href}
-                                                onClick={() => setMobileMenuOpen(false)}
-                                                className="flex items-center gap-2 text-slate-900 font-bold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
+                                                onClick={(e) => { setMobileMenuOpen(false); scrollToSection(e, link.href); }}
+                                                className="flex items-center gap-2 text-slate-900 font-bold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all cursor-pointer"
                                             >
                                                 {link.name}
                                                 <div className="ml-auto flex items-center gap-2">
