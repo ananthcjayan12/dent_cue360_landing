@@ -17,11 +17,11 @@ const Navbar: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
+    const navLinks: { name: string, href: string, isNew?: boolean, isPro?: boolean }[] = [
         { name: 'Features', href: '/#features' },
         { name: 'ROI Calculator', href: '/#roi-calculator' },
         { name: 'Profit Calculators', href: '/clinic-profit-intelligence', isNew: true },
-        { name: 'Dental Toolkit', href: '/dental-toolkit' },
+        { name: 'Practice Hub', href: '/dental-toolkit', isPro: true },
         { name: 'Pricing', href: '/#pricing' },
     ];
 
@@ -52,11 +52,13 @@ const Navbar: React.FC = () => {
                                 <a key={link.name} href={link.href} className="text-sm font-semibold text-slate-900 hover:text-dental-600 transition-colors whitespace-nowrap flex items-center gap-1.5">
                                     {link.name}
                                     {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider shadow-sm">New</span>}
+                                    {link.isPro && <span className="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 border border-cyan-200 text-[10px] font-black uppercase tracking-wider shadow-sm">Pro</span>}
                                 </a>
                             ) : (
                                 <Link key={link.name} to={link.href} className="text-sm font-semibold text-slate-900 hover:text-dental-600 transition-colors whitespace-nowrap flex items-center gap-1.5">
                                     {link.name}
                                     {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider shadow-sm">New</span>}
+                                    {link.isPro && <span className="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 border border-cyan-200 text-[10px] font-black uppercase tracking-wider shadow-sm">Pro</span>}
                                 </Link>
                             )
                         ))}
@@ -112,7 +114,10 @@ const Navbar: React.FC = () => {
                                                 className="flex items-center gap-2 text-slate-900 font-bold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
                                             >
                                                 {link.name}
-                                                {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider ml-auto">New</span>}
+                                                <div className="ml-auto flex items-center gap-2">
+                                                    {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider">New</span>}
+                                                    {link.isPro && <span className="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 border border-cyan-200 text-[10px] font-black uppercase tracking-wider">Pro</span>}
+                                                </div>
                                             </a>
                                         ) : (
                                             <Link
@@ -122,7 +127,10 @@ const Navbar: React.FC = () => {
                                                 className="flex items-center gap-2 text-slate-900 font-bold text-lg py-2 px-3 rounded-lg hover:bg-slate-50 hover:text-dental-600 transition-all"
                                             >
                                                 {link.name}
-                                                {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider ml-auto">New</span>}
+                                                <div className="ml-auto flex items-center gap-2">
+                                                    {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider">New</span>}
+                                                    {link.isPro && <span className="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 border border-cyan-200 text-[10px] font-black uppercase tracking-wider">Pro</span>}
+                                                </div>
                                             </Link>
                                         )
                                     ))}
