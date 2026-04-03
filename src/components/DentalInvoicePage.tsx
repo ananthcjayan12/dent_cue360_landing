@@ -12,6 +12,18 @@ const DentalInvoicePage: React.FC = () => {
             metaDescription.setAttribute('content', "Generate clean, professional dental invoices in seconds. Auto-save clinic details, add procedures, calculate GST, and download as PDF completely free.");
         }
 
+        // Set canonical URL
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+            canonical.setAttribute('href', 'https://cue360.in/dental-invoice-generator');
+        }
+
+        // Set OG URL
+        let ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) {
+            ogUrl.setAttribute('content', 'https://cue360.in/dental-invoice-generator');
+        }
+
         return () => {
              // Optional cleanup
         };

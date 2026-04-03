@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
                         onClick={() => window.scrollTo(0, 0)}
                         className="flex items-center gap-2 cursor-pointer z-50 shrink-0"
                     >
-                        <img src="/logo.png" alt="Cue360 Logo" className="h-12 md:h-16 lg:h-20 w-auto object-contain transition-transform hover:scale-105" />
+                        <img src="/logo.png" alt="Cue360 — Dental Clinic Management Software" className="h-12 md:h-16 lg:h-20 w-auto object-contain transition-transform hover:scale-105" width={160} height={80} loading="eager" decoding="async" />
                     </Link>
 
                     {/* Centered Desktop Nav */}

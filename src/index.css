@@ -3,9 +3,27 @@
 @tailwind utilities;
 
 @layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
     body {
         @apply antialiased text-slate-900 bg-white selection:bg-dental-200 selection:text-dental-900;
         font-feature-settings: 'cv11', 'ss01';
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Prevent horizontal overflow on mobile */
+    html, body {
+        overflow-x: hidden;
+    }
+
+    /* Improve image rendering across devices */
+    img {
+        max-width: 100%;
+        height: auto;
     }
 }
 

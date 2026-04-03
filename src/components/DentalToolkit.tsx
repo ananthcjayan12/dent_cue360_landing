@@ -15,6 +15,18 @@ const DentalToolkit: React.FC = () => {
             metaDescription.setAttribute('content', "Free dental tools for Indian dentists and clinics. Interactive tooth number chart, dental invoice generator, break-even calculator, and salary calculator. No login required.");
         }
 
+        // Set canonical URL
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+            canonical.setAttribute('href', 'https://cue360.in/dental-toolkit');
+        }
+
+        // Set OG URL
+        let ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) {
+            ogUrl.setAttribute('content', 'https://cue360.in/dental-toolkit');
+        }
+
         // Schema Markup
         const webAppData = {
             "@context": "https://schema.org",
