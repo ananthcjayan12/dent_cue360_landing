@@ -12,6 +12,10 @@ const Contact: React.FC = () => {
         const intent = searchParams.get('intent');
         if (intent) {
             setPrefillMessage(decodeURIComponent(intent));
+            // Let the DOM finish layout calculation and gracefully scroll down
+            setTimeout(() => {
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            }, 150);
         }
     }, [searchParams]);
 

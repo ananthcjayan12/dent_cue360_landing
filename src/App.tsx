@@ -5,6 +5,8 @@ import TermsOfService from './components/TermsOfService';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ClinicProfitIntelligence from './components/ClinicProfitIntelligence';
+import DentalToolkit from './components/DentalToolkit';
+import DentalInvoicePage from './components/DentalInvoicePage';
 
 function App() {
     return (
@@ -13,6 +15,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Landing />} />
                     <Route path="/clinic-profit-intelligence" element={<ClinicProfitIntelligence />} />
+                    <Route path="/dental-toolkit" element={<DentalToolkit />} />
+                    <Route path="/dental-invoice-generator" element={<DentalInvoicePage />} />
                     <Route path="/privacy" element={
                         <>
                             <Navbar />

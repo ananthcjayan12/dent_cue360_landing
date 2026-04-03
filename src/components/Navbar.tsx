@@ -21,6 +21,7 @@ const Navbar: React.FC = () => {
         { name: 'Features', href: '/#features' },
         { name: 'ROI Calculator', href: '/#roi-calculator' },
         { name: 'Profit Calculators', href: '/clinic-profit-intelligence', isNew: true },
+        { name: 'Dental Toolkit', href: '/dental-toolkit' },
         { name: 'Pricing', href: '/#pricing' },
     ];
 
@@ -45,7 +46,7 @@ const Navbar: React.FC = () => {
                     </Link>
 
                     {/* Centered Desktop Nav */}
-                    <div className="hidden md:flex items-center justify-center gap-6 xl:gap-10 absolute left-1/2 -translate-x-1/2">
+                    <div className="hidden lg:flex flex-1 items-center justify-center gap-4 xl:gap-10 px-4 min-w-0">
                         {navLinks.map(link => (
                             link.href.startsWith('/#') ? (
                                 <a key={link.name} href={link.href} className="text-sm font-semibold text-slate-900 hover:text-dental-600 transition-colors whitespace-nowrap flex items-center gap-1.5">
@@ -64,7 +65,7 @@ const Navbar: React.FC = () => {
                     {/* Right Area - CTA & Mobile Toggle */}
                     <div className="flex items-center gap-4 shrink-0 z-[1000]">
                         {/* Desktop CTA */}
-                        <div className="hidden md:flex items-center gap-4">
+                        <div className="hidden lg:flex items-center gap-4">
                             <a href="https://dent.cue360.in/" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-slate-900 hover:text-dental-600 whitespace-nowrap">Login</a>
                             <button
                                 onClick={() => goToContact('Book a Demo')}
@@ -83,7 +84,7 @@ const Navbar: React.FC = () => {
                         {/* Mobile Toggle */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="md:hidden p-2 text-slate-800 rounded-lg hover:bg-slate-100 transition-colors"
+                            className="lg:hidden p-2 text-slate-800 rounded-lg hover:bg-slate-100 transition-colors"
                             aria-label="Toggle menu"
                         >
                             {mobileMenuOpen ? <XMarkIcon className="w-7 h-7" /> : <Bars3Icon className="w-7 h-7" />}
@@ -98,7 +99,7 @@ const Navbar: React.FC = () => {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden md:hidden"
+                            className="overflow-hidden lg:hidden"
                         >
                             <div className="mx-4 mb-4 p-4 space-y-4 bg-white/95 backdrop-blur-xl border border-slate-200/60 rounded-2xl shadow-2xl">
                                 <div className="flex flex-col gap-2">
@@ -144,7 +145,7 @@ const Navbar: React.FC = () => {
 
             {/* Mobile Bottom CTA Bar */}
             <div
-                className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-[1000] flex gap-3"
+                className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-[1000] flex gap-3"
                 style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
             >
                 <button
