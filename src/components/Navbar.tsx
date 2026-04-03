@@ -52,13 +52,13 @@ const Navbar: React.FC = () => {
                                 <a key={link.name} href={link.href} className="text-sm font-semibold text-slate-900 hover:text-dental-600 transition-colors whitespace-nowrap flex items-center gap-1.5">
                                     {link.name}
                                     {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider shadow-sm">New</span>}
-                                    {link.isPro && <span className="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 border border-cyan-200 text-[10px] font-black uppercase tracking-wider shadow-sm">Pro</span>}
+                                    {link.isPro && <span className="px-1.5 py-px rounded-full bg-cyan-50 text-cyan-600 border border-cyan-200/60 text-[8px] font-bold uppercase tracking-wider">Pro</span>}
                                 </a>
                             ) : (
                                 <Link key={link.name} to={link.href} className="text-sm font-semibold text-slate-900 hover:text-dental-600 transition-colors whitespace-nowrap flex items-center gap-1.5">
                                     {link.name}
                                     {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider shadow-sm">New</span>}
-                                    {link.isPro && <span className="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 border border-cyan-200 text-[10px] font-black uppercase tracking-wider shadow-sm">Pro</span>}
+                                    {link.isPro && <span className="px-1.5 py-px rounded-full bg-cyan-50 text-cyan-600 border border-cyan-200/60 text-[8px] font-bold uppercase tracking-wider">Pro</span>}
                                 </Link>
                             )
                         ))}
@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
                                                 {link.name}
                                                 <div className="ml-auto flex items-center gap-2">
                                                     {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider">New</span>}
-                                                    {link.isPro && <span className="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 border border-cyan-200 text-[10px] font-black uppercase tracking-wider">Pro</span>}
+                                                    {link.isPro && <span className="px-1.5 py-px rounded-full bg-cyan-50 text-cyan-600 border border-cyan-200/60 text-[8px] font-bold uppercase tracking-wider">Pro</span>}
                                                 </div>
                                             </a>
                                         ) : (
@@ -129,7 +129,7 @@ const Navbar: React.FC = () => {
                                                 {link.name}
                                                 <div className="ml-auto flex items-center gap-2">
                                                     {link.isNew && <span className="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-black uppercase tracking-wider">New</span>}
-                                                    {link.isPro && <span className="px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 border border-cyan-200 text-[10px] font-black uppercase tracking-wider">Pro</span>}
+                                                    {link.isPro && <span className="px-1.5 py-px rounded-full bg-cyan-50 text-cyan-600 border border-cyan-200/60 text-[8px] font-bold uppercase tracking-wider">Pro</span>}
                                                 </div>
                                             </Link>
                                         )
