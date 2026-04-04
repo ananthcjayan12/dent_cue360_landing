@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigateToContact } from '../../hooks/useNavigateToContact';
+import { handleShare as shareContent } from '../../utils/handleShare';
 
 interface Procedure {
     id: string;
@@ -56,8 +57,11 @@ const ProcedureProfitRanker: React.FC = () => {
         if (ranked.length > 0) {
             const top = ranked[0];
             const bottom = ranked[ranked.length - 1];
-            navigator.clipboard.writeText(`I just found out my highest earning procedure makes ${formatINR(top.hourlyRate)}/hr, and my lowest makes ${formatINR(bottom.hourlyRate)}/hr. Calculated with Cue360's free Clinic Profit Intelligence tool: cue360.in/clinic-profit-intelligence`);
-            alert("Copied to clipboard!");
+            shareContent({
+                title: 'Procedure Profit Ranker — Cue360 Clinic Profit Intelligence',
+                text: `I just found out my highest earning procedure makes ${formatINR(top.hourlyRate)}/hr, and my lowest makes ${formatINR(bottom.hourlyRate)}/hr. Find out which procedures are really making you money 👇`,
+                url: 'https://cue360.in/clinic-profit-intelligence',
+            });
         }
     };
 

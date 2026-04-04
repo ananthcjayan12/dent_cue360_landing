@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigateToContact } from '../../hooks/useNavigateToContact';
+import { handleShare as shareContent } from '../../utils/handleShare';
 
 const StaffCostPerPatient: React.FC = () => {
     const goToContact = useNavigateToContact();
@@ -33,8 +34,11 @@ const StaffCostPerPatient: React.FC = () => {
     }
 
     const handleShare = () => {
-        navigator.clipboard.writeText(`I just found out my staff cost per patient is ${formatINR(staffCostActual)}, and no-shows are costing my team ${formatINR(noShowMonthlyCost)} per month. Calculated with Cue360's free Clinic Profit Intelligence tool: cue360.in/clinic-profit-intelligence`);
-        alert("Copied to clipboard!");
+        shareContent({
+            title: 'Staff Cost Per Patient — Cue360 Clinic Profit Intelligence',
+            text: `I just found out my staff cost per patient is ${formatINR(staffCostActual)}, and no-shows are costing my team ${formatINR(noShowMonthlyCost)} per month. See how much your clinic might be leaking 👇`,
+            url: 'https://cue360.in/clinic-profit-intelligence',
+        });
     };
 
     return (

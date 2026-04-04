@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigateToContact } from '../../hooks/useNavigateToContact';
+import { handleShare as shareContent } from '../../utils/handleShare';
 
 const PatientBreakEven: React.FC = () => {
     const goToContact = useNavigateToContact();
@@ -29,8 +30,11 @@ const PatientBreakEven: React.FC = () => {
     const safeMarginTakeHome = safeMarginPatients * 25 * revenue - totalFixedCosts;
 
     const handleShare = () => {
-        navigator.clipboard.writeText(`My clinic burns ${formatINR(totalFixedCosts)} a month. I need exactly ${breakEvenMonthlyCeil} patients per month (${breakEvenDailyCeil}/day) just to break even. Calculated with Cue360's free Clinic Profit Intelligence tool: cue360.in/clinic-profit-intelligence`);
-        alert("Copied to clipboard!");
+        shareContent({
+            title: 'Patient Break-Even Limit — Cue360 Clinic Profit Intelligence',
+            text: `My clinic burns ${formatINR(totalFixedCosts)} a month. I need exactly ${breakEvenMonthlyCeil} patients per month (${breakEvenDailyCeil}/day) just to break even. See how much your clinic might be leaking 👇`,
+            url: 'https://cue360.in/clinic-profit-intelligence',
+        });
     };
 
     return (
