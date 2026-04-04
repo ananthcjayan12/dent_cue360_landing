@@ -22,9 +22,9 @@ const SalaryCalc: React.FC = () => {
   const moreRevenueHourly = Math.round((((collections || 0) * 1.1) - (expenses || 0)) / totalWorkingHours);
 
   const handleShareTool = () => {
-    const url = `${window.location.origin}${window.location.pathname}#salary-calculator`;
-    navigator.clipboard.writeText(url);
-    alert('Tool link copied to clipboard!');
+    const message = `You NEED to try this 👀 It literally shows you what you actually earn per hour as a clinic owner after all expenses. Free, takes 2 mins, and honestly eye-opening. Best free dental finance tool I've found → https://cue360.in/dental-toolkit#salary-calculator`;
+    navigator.clipboard.writeText(message);
+    alert('Message copied! Send it to a colleague 🚀');
   };
 
   const handleShareResult = () => {

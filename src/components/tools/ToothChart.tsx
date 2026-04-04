@@ -50,6 +50,13 @@ export default function ToothChart() {
   // Reset scroll hint when tab changes
   useEffect(() => { setHasScrolled(false); }, [activeTab, selectedTooth]);
 
+  // --- SHARE TOOL ---
+  const handleShareTool = () => {
+    const message = `bro this dental chart tool is actually 🔥 FDI quiz, tooth explorer, notation converter + charting simulator — all in one place, all FREE. best way to understand dental charts before practicals, way better than just reading textbooks fr 🦾→ https://cue360.in/dental-toolkit#tooth-chart`;
+    navigator.clipboard.writeText(message);
+    alert('Copied! Share it with your batchmates 🦷');
+  };
+
   useEffect(() => {
     // Logic on tab change
     setSelectedTooth(null);
@@ -189,13 +196,22 @@ export default function ToothChart() {
   return (
     <div id="tooth-chart" className="scroll-mt-32 max-w-[1400px] mx-auto py-10">
       
-      <div className="flex flex-col mb-8 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0D1B2A] tracking-tight mb-2">
-             Dental Chart Master
-          </h2>
-          <p className="text-lg text-slate-600 font-medium">
-             Interactive Tooth Number Chart, Quiz & Charting Simulator.
-          </p>
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 text-center md:text-left">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0D1B2A] tracking-tight mb-2">
+               Dental Chart Master
+            </h2>
+            <p className="text-lg text-slate-600 font-medium">
+               Interactive Tooth Number Chart, Quiz &amp; Charting Simulator.
+            </p>
+          </div>
+          <button
+            onClick={handleShareTool}
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-semibold transition-colors shrink-0"
+          >
+            <Share2 className="w-4 h-4" />
+            Share This Tool
+          </button>
       </div>
 
       <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-200 overflow-hidden print:border-none print:shadow-none flex flex-col lg:h-[85vh] lg:max-h-[900px]">
