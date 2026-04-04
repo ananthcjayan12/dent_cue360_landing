@@ -3,6 +3,7 @@ import { Share2, Download, Printer, Plus, Trash2, Image as ImageIcon, Lock, X, S
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { useNavigateToContact } from '../../hooks/useNavigateToContact';
+import { handleShare } from '../../utils/handleShare';
 
 interface LineItem {
   id: string;
@@ -284,9 +285,11 @@ const InvoiceGenerator: React.FC = () => {
   };
 
   const handleShareTool = () => {
-    const message = `Just found the best free dental invoice tool and had to share it 🦷\n\nZero login, auto-saves your clinic details, generates a professional PDF in seconds. It's completely free — you need this → https://cue360.in/dental-invoice-generator`;
-    navigator.clipboard.writeText(message);
-    alert('Message copied! Share it with your colleague 🤝');
+    handleShare({
+      title: 'Free Dental Invoice Generator — Cue360',
+      text: `Just found the best free dental invoice tool and had to share it 🦷\n\nZero login, auto-saves your clinic details, generates a professional PDF in seconds. It's completely free — you need this!`,
+      url: 'https://cue360.in/dental-invoice-generator',
+    });
   };
 
   return (

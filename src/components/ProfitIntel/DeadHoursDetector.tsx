@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigateToContact } from '../../hooks/useNavigateToContact';
+import { handleShare as shareContent } from '../../utils/handleShare';
 
 const DeadHoursDetector: React.FC = () => {
     const goToContact = useNavigateToContact();
@@ -52,8 +53,11 @@ const DeadHoursDetector: React.FC = () => {
     const strokeDashoffset = circumference - (utilisationRate / 100) * circumference;
 
     const handleShare = () => {
-        navigator.clipboard.writeText(`I just found out my clinic has ${deadHoursPerWeek.toFixed(1)} dead chair-hours per week — worth ${formatINR(revenueGapPerMonth)} a month in lost revenue. Calculated with Cue360's free Clinic Profit Intelligence tool: cue360.in/clinic-profit-intelligence`);
-        alert("Copied to clipboard!");
+        shareContent({
+            title: 'Dead Hours Detector — Cue360 Clinic Profit Intelligence',
+            text: `I just found out my clinic has ${deadHoursPerWeek.toFixed(1)} dead chair-hours per week — worth ${formatINR(revenueGapPerMonth)} a month in lost revenue. See what yours might be leaking 👇`,
+            url: 'https://cue360.in/clinic-profit-intelligence',
+        });
     };
 
     return (

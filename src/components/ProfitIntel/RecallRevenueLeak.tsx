@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigateToContact } from '../../hooks/useNavigateToContact';
+import { handleShare as shareContent } from '../../utils/handleShare';
 
 const RecallRevenueLeak: React.FC = () => {
     const goToContact = useNavigateToContact();
@@ -23,8 +24,11 @@ const RecallRevenueLeak: React.FC = () => {
     const revenueLeak = unrecalledPatients * safeAvgValue;
 
     const handleShare = () => {
-        navigator.clipboard.writeText(`I just found out my clinic is losing ${formatINR(revenueLeak)} a year from patients who simply forget to book their 6-month recall. Calculated with Cue360's free Clinic Profit Intelligence tool: cue360.in/clinic-profit-intelligence`);
-        alert("Copied to clipboard!");
+        shareContent({
+            title: 'Recall Revenue Leak — Cue360 Clinic Profit Intelligence',
+            text: `I just found out my clinic is losing ${formatINR(revenueLeak)} a year from patients who simply forget to book their 6-month recall. See how much your clinic might be leaking 👇`,
+            url: 'https://cue360.in/clinic-profit-intelligence',
+        });
     };
 
     return (

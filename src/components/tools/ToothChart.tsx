@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Share2, Printer, CheckCircle2, Download, Trash2, ArrowRight } from 'lucide-react';
+import { handleShare } from '../../utils/handleShare';
 import { adultTeeth, paedoTeeth, simulatorScenarios } from './ToothChartData';
 import type { ToothData, DentitionType, NotationSystem } from './ToothChartData';
 import { SimpleToothSVG, SurfaceDiagram, ToothSilhouetteSVG, ChartingOverlaySVG } from './ToothChartIcons';
@@ -52,9 +53,11 @@ export default function ToothChart() {
 
   // --- SHARE TOOL ---
   const handleShareTool = () => {
-    const message = `bro this dental chart tool is actually 🔥 FDI quiz, tooth explorer, notation converter + charting simulator — all in one place, all FREE. best way to understand dental charts before practicals, way better than just reading textbooks fr 🦾→ https://cue360.in/dental-toolkit#tooth-chart`;
-    navigator.clipboard.writeText(message);
-    alert('Copied! Share it with your batchmates 🦷');
+    handleShare({
+      title: 'Dental Chart Master — Cue360',
+      text: `bro this dental chart tool is actually 🔥 FDI quiz, tooth explorer, notation converter + charting simulator — all in one place, all FREE. Best way to understand dental charts before practicals fr 🦾`,
+      url: 'https://cue360.in/dental-toolkit#tooth-chart',
+    });
   };
 
   useEffect(() => {
