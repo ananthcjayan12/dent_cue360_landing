@@ -91,6 +91,243 @@ const ClinicProfitIntelligence: React.FC = () => {
         };
     }, []);
 
+    // ═══════════════════════════════════════════════════════════════════
+    // META PIXEL — BEHAVIOURAL EVENT TRACKING (SPA-compatible)
+    // Runs inside useEffect so it executes AFTER React has rendered
+    // all child components and the DOM elements actually exist.
+    // ═══════════════════════════════════════════════════════════════════
+    useEffect(() => {
+        const fbq = (window as any).fbq;
+        if (typeof fbq !== 'function') {
+            console.warn('[Cue360 Pixel] fbq not found — Meta Pixel base code may not be loaded.');
+            return;
+        }
+
+        // ── Utility ──────────────────────────────────────────────────────
+        const _fired: Record<string, boolean> = {};
+        const _timers: Record<string, number> = {};
+        const _started = Date.now();
+
+        function fire(eventName: string, params?: Record<string, any>, dedupKey?: string) {
+            if (dedupKey && _fired[dedupKey]) return;
+            if (dedupKey) _fired[dedupKey] = true;
+            fbq('trackCustom', eventName, params || {});
+            console.log('[Cue360 Pixel]', eventName, params);
+        }
+
+        function timeOnPage(): number {
+            return Math.round((Date.now() - _started) / 1000);
+        }
+
+        // Collect all cleanup functions
+        const cleanups: (() => void)[] = [];
+
+        // ── ① PAGE QUALITY SIGNAL (15s engaged visit) ────────────────────
+        const engagedTimer = setTimeout(() => {
+            fire('CPI_EngagedVisit', {
+                content_name: 'clinic_profit_intelligence',
+                time_on_page: 15
+            }, 'engaged_visit');
+        }, 15000);
+        cleanups.push(() => clearTimeout(engagedTimer));
+
+        // ── ② TOOL CARD CLICK ────────────────────────────────────────────
+        const handleToolCardClick = (e: Event) => {
+            const card = (e.target as HTMLElement).closest('[data-tool-card]');
+            if (!card) return;
+            const toolName = card.getAttribute('data-tool-card');
+            fire('CPI_ToolSelected', {
+                tool_name: toolName,
+                content_name: 'clinic_profit_intelligence',
+                time_on_page: timeOnPage()
+            });
+        };
+        document.addEventListener('click', handleToolCardClick);
+        cleanups.push(() => document.removeEventListener('click', handleToolCardClick));
+
+        // ── ③ TOOL INTERACTION START ─────────────────────────────────────
+        const toolStarted: Record<string, boolean> = {};
+        const handleToolInput = (e: Event) => {
+            const section = (e.target as HTMLElement).closest('[data-tool-section]');
+            if (!section) return;
+            const toolName = section.getAttribute('data-tool-section')!;
+            if (toolStarted[toolName]) return;
+            toolStarted[toolName] = true;
+            _timers[toolName] = Date.now();
+            fire('CPI_ToolInteractionStart', {
+                tool_name: toolName,
+                content_name: 'clinic_profit_intelligence',
+                time_on_page: timeOnPage()
+            });
+        };
+        document.addEventListener('input', handleToolInput);
+        cleanups.push(() => document.removeEventListener('input', handleToolInput));
+
+        // ── ④ TOOL RESULT SEEN (IntersectionObserver) ────────────────────
+        // Small delay to let child components finish rendering
+        const observers: IntersectionObserver[] = [];
+        const resultObserverTimer = setTimeout(() => {
+            const resultBlocks = document.querySelectorAll('[data-tool-result]');
+            if (!resultBlocks.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const toolName = entry.target.getAttribute('data-tool-result')!;
+                    const engageSecs = _timers[toolName]
+                        ? Math.round((Date.now() - _timers[toolName]) / 1000)
+                        : 0;
+                    fire('CPI_ToolResultSeen', {
+                        tool_name: toolName,
+                        content_name: 'clinic_profit_intelligence',
+                        engagement_secs: engageSecs,
+                        time_on_page: timeOnPage()
+                    }, 'result_seen_' + toolName);
+                });
+            }, { threshold: 0.5 });
+
+            resultBlocks.forEach((block) => observer.observe(block));
+            observers.push(observer);
+        }, 500);
+        cleanups.push(() => clearTimeout(resultObserverTimer));
+
+        // ── ⑤ SHARE BUTTON CLICK ────────────────────────────────────────
+        const handleShareClick = (e: Event) => {
+            const shareBtn = (e.target as HTMLElement).closest('[data-share-tool]');
+            if (!shareBtn) return;
+            const toolName = shareBtn.getAttribute('data-share-tool');
+            fire('CPI_ResultShared', {
+                tool_name: toolName,
+                content_name: 'clinic_profit_intelligence',
+                time_on_page: timeOnPage()
+            });
+        };
+        document.addEventListener('click', handleShareClick);
+        cleanups.push(() => document.removeEventListener('click', handleShareClick));
+
+        // ── ⑥ CTA CLICK — TRIAL ─────────────────────────────────────────
+        const handleTrialClick = (e: Event) => {
+            const trialBtn = (e.target as HTMLElement).closest('[data-cta="trial"]');
+            if (!trialBtn) return;
+            const toolName = trialBtn.getAttribute('data-cta-tool') || 'unknown';
+            fbq('track', 'Lead', {
+                content_name: 'clinic_profit_intelligence_trial',
+                content_category: 'dental_saas',
+                currency: 'INR'
+            });
+            fire('CPI_TrialCTAClick', {
+                tool_name: toolName,
+                content_name: 'clinic_profit_intelligence',
+                time_on_page: timeOnPage()
+            });
+        };
+        document.addEventListener('click', handleTrialClick);
+        cleanups.push(() => document.removeEventListener('click', handleTrialClick));
+
+        // ── ⑦ CTA CLICK — DEMO ──────────────────────────────────────────
+        const handleDemoClick = (e: Event) => {
+            const demoBtn = (e.target as HTMLElement).closest('[data-cta="demo"]');
+            if (!demoBtn) return;
+            const toolName = demoBtn.getAttribute('data-cta-tool') || 'unknown';
+            fbq('track', 'Contact', {
+                content_name: 'clinic_profit_intelligence_demo',
+                content_category: 'dental_saas'
+            });
+            fire('CPI_DemoCTAClick', {
+                tool_name: toolName,
+                content_name: 'clinic_profit_intelligence',
+                time_on_page: timeOnPage()
+            });
+        };
+        document.addEventListener('click', handleDemoClick);
+        cleanups.push(() => document.removeEventListener('click', handleDemoClick));
+
+        // ── ⑧ CLOSING SECTION SEEN ──────────────────────────────────────
+        const closingObserverTimer = setTimeout(() => {
+            const closing = document.querySelector('[data-section="closing-cta"]');
+            if (!closing) return;
+            const obs = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    fire('CPI_FullJourneySeen', {
+                        content_name: 'clinic_profit_intelligence',
+                        time_on_page: timeOnPage()
+                    }, 'full_journey_seen');
+                    obs.disconnect();
+                }
+            }, { threshold: 0.4 });
+            obs.observe(closing);
+            observers.push(obs);
+        }, 500);
+        cleanups.push(() => clearTimeout(closingObserverTimer));
+
+        // ── ⑨ FAQ ACCORDION OPEN ────────────────────────────────────────
+        const handleFaqClick = (e: Event) => {
+            const faqItem = (e.target as HTMLElement).closest('[data-faq-item]');
+            if (!faqItem) return;
+            const question = faqItem.getAttribute('data-faq-item');
+            fire('CPI_FAQOpened', {
+                question: question,
+                content_name: 'clinic_profit_intelligence',
+                time_on_page: timeOnPage()
+            });
+        };
+        document.addEventListener('click', handleFaqClick);
+        cleanups.push(() => document.removeEventListener('click', handleFaqClick));
+
+        // ── ⑩ EXIT INTENT (desktop only) ─────────────────────────────────
+        let exitFired = false;
+        const handleMouseLeave = (e: MouseEvent) => {
+            if (exitFired || e.clientY > 50) return;
+            exitFired = true;
+            fire('CPI_ExitIntent', {
+                content_name: 'clinic_profit_intelligence',
+                time_on_page: timeOnPage()
+            }, 'exit_intent');
+        };
+        document.addEventListener('mouseleave', handleMouseLeave as EventListener);
+        cleanups.push(() => document.removeEventListener('mouseleave', handleMouseLeave as EventListener));
+
+        // ── ⑪ SCROLL DEPTH MILESTONES ────────────────────────────────────
+        const scrollMilestones: Record<number, boolean> = { 25: false, 50: false, 75: false, 100: false };
+        const handleScroll = () => {
+            const scrolled = Math.round(
+                (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+            );
+            [25, 50, 75, 100].forEach((m) => {
+                if (!scrollMilestones[m] && scrolled >= m) {
+                    scrollMilestones[m] = true;
+                    fire('CPI_ScrollDepth', {
+                        depth: m,
+                        content_name: 'clinic_profit_intelligence',
+                        time_on_page: timeOnPage()
+                    }, 'scroll_' + m);
+                }
+            });
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        cleanups.push(() => window.removeEventListener('scroll', handleScroll));
+
+        // ── ⑫ ROI CALCULATOR HANDOFF ─────────────────────────────────────
+        const ref = document.referrer || '';
+        const href = window.location.href || '';
+        const fromROI = ref.includes('cue360.in') || href.includes('utm_source=roi_calculator');
+        if (fromROI) {
+            fire('CPI_FromROICalculator', {
+                content_name: 'clinic_profit_intelligence',
+                referrer: ref
+            }, 'from_roi_calc');
+        }
+
+        console.log('[Cue360 Pixel] CPI behavioural tracking initialised — 12 events active.');
+
+        // ── CLEANUP on unmount ───────────────────────────────────────────
+        return () => {
+            cleanups.forEach((fn) => fn());
+            observers.forEach((obs) => obs.disconnect());
+            console.log('[Cue360 Pixel] CPI tracking cleaned up.');
+        };
+    }, []);
+
     return (
         <div className="bg-white min-h-screen text-slate-800 font-sans selection:bg-blue-200 selection:text-blue-900">
             <Navbar />
