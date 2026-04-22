@@ -121,10 +121,561 @@ const DentalToolkit: React.FC = () => {
         script2.innerHTML = JSON.stringify(faqData);
         document.head.appendChild(script2);
 
+        // ============================================================
+        // CUE360 — DENTAL TOOLKIT PAGE TRACKING
+        // Meta Pixel ID: 787549303968445
+        // Page: /dental-toolkit
+        // Strategy: Identify user type (student vs clinic owner)
+        //           and retarget accordingly
+        // ============================================================
+
+        // Fire GA4 page-specific config for this page
+        if (typeof (window as any).gtag !== 'undefined') {
+            (window as any).gtag('config', 'G-FCZM32STHB', {
+                'page_title': 'Dental Toolkit - Practice Hub',
+                'page_location': window.location.href,
+                'custom_map': {
+                    'dimension1': 'user_type',
+                    'dimension2': 'tool_used'
+                }
+            });
+        }
+
+        // Fire Meta Pixel PageView for SPA navigation
+        if (typeof (window as any).fbq !== 'undefined') {
+            (window as any).fbq('track', 'PageView');
+        }
+
+        // --- UTILITY: fire Meta + GA4 simultaneously ---
+        function trackEvent(metaName: string, metaParams: Record<string, unknown>, ga4Name?: string, ga4Params?: Record<string, unknown>) {
+            if (typeof (window as any).fbq !== 'undefined') {
+                (window as any).fbq('trackCustom', metaName, metaParams || {});
+            }
+            if (typeof (window as any).gtag !== 'undefined') {
+                (window as any).gtag('event', ga4Name || metaName, ga4Params || metaParams || {});
+            }
+        }
+
+        // --- UTILITY: detect user type from behaviour ---
+        const userSignals = {
+            usedSalaryCalc: false,
+            enteredRevenue: false,
+            usedDentalChart: false,
+            usedInvoiceTool: false,
+            visitedPricing: false,
+            userType: 'unknown' // 'student', 'clinic_owner', 'practising'
+        };
+
+        // ============================================================
+        // EVENT 1 — PAGE ENGAGED (90 seconds)
+        // ============================================================
+        const engagementTimer = setTimeout(function() {
+            trackEvent(
+                'ToolkitPageEngaged',
+                {
+                    page: 'dental_toolkit',
+                    time_spent: '90s',
+                    user_type: userSignals.userType
+                },
+                'toolkit_page_engaged',
+                {
+                    engagement_time: '90s',
+                    page: 'dental_toolkit'
+                }
+            );
+        }, 90000);
+
+        // ============================================================
+        // EVENT 2 — TOOL NAVIGATION TAB CLICKED
+        // ============================================================
+        const tabClickHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const text = (el.innerText || el.textContent || '').trim();
+            const toolTabs = ['invoice generator', 'fdi tooth chart', 'target salary'];
+
+            toolTabs.forEach(function(tab) {
+                if (text.toLowerCase().includes(tab)) {
+                    trackEvent(
+                        'ToolkitTabClicked',
+                        {
+                            page: 'dental_toolkit',
+                            tab_clicked: text,
+                            signal: 'tool_intent_identified'
+                        },
+                        'toolkit_tab_clicked',
+                        {
+                            tab_name: text,
+                            page: 'dental_toolkit'
+                        }
+                    );
+                }
+            });
+        };
+        document.addEventListener('click', tabClickHandler);
+
+        // ============================================================
+        // EVENT 3 — INVOICE GENERATOR LAUNCHED
+        // ============================================================
+        const invoiceLaunchHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const text = (el.innerText || el.textContent || '').trim().toLowerCase();
+
+            if (text.includes('launch invoice') || text.includes('invoice app') || (el.closest && el.closest('[href*="invoice"]'))) {
+                userSignals.usedInvoiceTool = true;
+                userSignals.userType = 'clinic_owner';
+
+                if (typeof (window as any).fbq !== 'undefined') {
+                    (window as any).fbq('track', 'Lead', {
+                        content_name: 'Invoice Tool Launched from Toolkit',
+                        content_category: 'dental_toolkit',
+                        value: 0.5,
+                        currency: 'INR'
+                    });
+                }
+                trackEvent(
+                    'ToolkitInvoiceLaunched',
+                    {
+                        page: 'dental_toolkit',
+                        action: 'launched_invoice_tool',
+                        user_type: 'clinic_owner',
+                        signal: 'billing_intent'
+                    },
+                    'toolkit_invoice_launched',
+                    {
+                        tool: 'invoice_generator',
+                        user_type: 'clinic_owner'
+                    }
+                );
+            }
+        };
+        document.addEventListener('click', invoiceLaunchHandler);
+
+        // ============================================================
+        // EVENT 4 — DENTAL CHART MASTER USED
+        // ============================================================
+        const chartModeHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const text = (el.innerText || el.textContent || '').trim().toLowerCase();
+            const chartModes = ['explore', 'identify', 'notation', 'charting simulator', 'quiz'];
+
+            chartModes.forEach(function(mode) {
+                if (text.includes(mode)) {
+                    userSignals.usedDentalChart = true;
+                    if (userSignals.userType === 'unknown') {
+                        userSignals.userType = 'student_or_junior';
+                    }
+                    trackEvent(
+                        'DentalChartModeUsed',
+                        {
+                            page: 'dental_toolkit',
+                            chart_mode: text,
+                            user_type: userSignals.userType,
+                            signal: 'dental_student_or_junior'
+                        },
+                        'dental_chart_mode_used',
+                        {
+                            mode: text,
+                            tool: 'dental_chart_master'
+                        }
+                    );
+                }
+            });
+        };
+        document.addEventListener('click', chartModeHandler);
+
+        // ============================================================
+        // EVENT 5 — TOOTH CLICKED IN CHART
+        // ============================================================
+        let toothClickCount = 0;
+        const toothClickHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const isToothElement = el.tagName === 'path' || el.tagName === 'circle' || (el.closest && el.closest('[class*="tooth"], [class*="chart"], svg'));
+
+            if (isToothElement) {
+                toothClickCount++;
+                if (toothClickCount === 1 || toothClickCount === 5) {
+                    trackEvent(
+                        'DentalChartToothClicked',
+                        {
+                            page: 'dental_toolkit',
+                            click_count: toothClickCount,
+                            signal: toothClickCount >= 5 ? 'deep_chart_engagement' : 'chart_started'
+                        },
+                        'tooth_clicked',
+                        {
+                            click_number: toothClickCount,
+                            tool: 'dental_chart_master'
+                        }
+                    );
+                }
+            }
+        };
+        document.addEventListener('click', toothClickHandler);
+
+        // ============================================================
+        // EVENT 6 — INVISIBLE SALARY CALCULATOR USED
+        // ============================================================
+        let salaryCalcTracked = false;
+        let revenueInputTracked = false;
+
+        const revenueInputHandler = function(e: Event) {
+            const el = e.target as HTMLInputElement;
+            const val = el.value ? el.value.toString().replace(/,/g, '') : '';
+            const isRevenueField = el.type === 'number' || el.type === 'range' || (el.placeholder && (el.placeholder.includes('revenue') || el.placeholder.includes('lakh') || el.placeholder.includes('monthly'))) || (el.closest && el.closest('[class*="salary"], [class*="calculator"], [class*="revenue"]'));
+
+            if (isRevenueField && parseInt(val) > 10000 && !revenueInputTracked) {
+                revenueInputTracked = true;
+                userSignals.enteredRevenue = true;
+                userSignals.usedSalaryCalc = true;
+                userSignals.userType = 'clinic_owner';
+
+                if (typeof (window as any).fbq !== 'undefined') {
+                    (window as any).fbq('track', 'ViewContent', {
+                        content_name: 'Salary Calculator Revenue Entered',
+                        content_category: 'clinic_owner_confirmed',
+                        value: 1,
+                        currency: 'INR'
+                    });
+                }
+                trackEvent(
+                    'SalaryCalcRevenueEntered',
+                    {
+                        page: 'dental_toolkit',
+                        action: 'entered_clinic_revenue',
+                        user_type: 'clinic_owner',
+                        signal: 'HIGHEST_INTENT — confirmed active clinic',
+                        revenue_range: parseInt(val) > 500000 ? 'above_5L' : parseInt(val) > 200000 ? '2L_to_5L' : 'below_2L'
+                    },
+                    'salary_calc_revenue_entered',
+                    {
+                        tool: 'salary_calculator',
+                        user_type: 'clinic_owner',
+                        revenue_bracket: parseInt(val) > 500000 ? 'above_5L' : '2L_to_5L'
+                    }
+                );
+            }
+        };
+        document.addEventListener('input', revenueInputHandler);
+
+        let sliderTracked = false;
+        const sliderInputHandler = function(e: Event) {
+            if (sliderTracked) return;
+            if ((e.target as HTMLInputElement).type === 'range') {
+                sliderTracked = true;
+                if (!salaryCalcTracked) {
+                    salaryCalcTracked = true;
+                    trackEvent(
+                        'SalaryCalcSliderUsed',
+                        {
+                            page: 'dental_toolkit',
+                            action: 'used_slider',
+                            signal: 'actively_calculating'
+                        },
+                        'salary_calc_slider_used',
+                        { tool: 'salary_calculator' }
+                    );
+                }
+            }
+        };
+        document.addEventListener('input', sliderInputHandler);
+
+        // ============================================================
+        // EVENT 7 — SHARE YOUR RESULT (Salary Calculator)
+        // ============================================================
+        const shareResultHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const text = (el.innerText || el.textContent || '').trim().toLowerCase();
+
+            if (text.includes('share your result') || text.includes('share result')) {
+                trackEvent(
+                    'SalaryResultShared',
+                    {
+                        page: 'dental_toolkit',
+                        action: 'shared_salary_result',
+                        signal: 'viral_share_intent',
+                        user_type: userSignals.userType
+                    },
+                    'salary_result_shared',
+                    {
+                        tool: 'salary_calculator',
+                        action: 'share_result'
+                    }
+                );
+            }
+        };
+        document.addEventListener('click', shareResultHandler);
+
+        // ============================================================
+        // EVENT 8 — "SHARE THIS TOOL" CLICKED
+        // ============================================================
+        const shareToolHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const text = (el.innerText || el.textContent || '').trim().toLowerCase();
+
+            if (text.includes('share this tool')) {
+                const chartSection = el.closest && el.closest('[class*="chart"], [id*="chart"]');
+                const salarySection = el.closest && el.closest('[class*="salary"], [id*="salary"]');
+                const parentSection = chartSection ? 'dental_chart_master' : salarySection ? 'salary_calculator' : 'unknown_tool';
+
+                trackEvent(
+                    'ToolkitToolShared',
+                    {
+                        page: 'dental_toolkit',
+                        tool_shared: parentSection,
+                        action: 'share_tool_clicked',
+                        signal: 'referral_network_intent'
+                    },
+                    'toolkit_tool_shared',
+                    {
+                        tool: parentSection,
+                        action: 'share'
+                    }
+                );
+            }
+        };
+        document.addEventListener('click', shareToolHandler);
+
+        // ============================================================
+        // EVENT 9 — FAQ ACCORDION OPENED
+        // ============================================================
+        const faqOpenHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const faqItem = el.closest && el.closest('[class*="faq"], [class*="accordion"], details, summary');
+
+            if (faqItem) {
+                const questionText = faqItem.querySelector('summary, [class*="question"], h3, h4');
+                const qText = questionText ? (questionText as HTMLElement).innerText || '' : 'unknown';
+
+                const ownerQuestions = ['profit', 'margin', 'earn', 'salary', 'income', 'gst', 'revenue', 'patients per day'];
+                const studentQuestions = ['fdi', 'numbering', 'universal', 'notation', 'system'];
+
+                let questionType = 'general';
+                ownerQuestions.forEach(function(kw) {
+                    if (qText.toLowerCase().includes(kw)) questionType = 'clinic_owner_question';
+                });
+                studentQuestions.forEach(function(kw) {
+                    if (qText.toLowerCase().includes(kw)) questionType = 'student_question';
+                });
+
+                if (questionType === 'clinic_owner_question' && userSignals.userType === 'unknown') {
+                    userSignals.userType = 'practising_dentist';
+                }
+
+                trackEvent(
+                    'ToolkitFAQOpened',
+                    {
+                        page: 'dental_toolkit',
+                        question: qText.substring(0, 100),
+                        question_type: questionType,
+                        user_signal: questionType
+                    },
+                    'faq_opened',
+                    {
+                        question_text: qText.substring(0, 100),
+                        question_type: questionType,
+                        page: 'dental_toolkit'
+                    }
+                );
+            }
+        };
+        document.addEventListener('click', faqOpenHandler);
+
+        // ============================================================
+        // EVENT 10 — MID-PAGE CTA STRIP CLICKED
+        // ============================================================
+        const midCtaHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const text = (el.innerText || el.textContent || '').trim();
+            const textLower = text.toLowerCase();
+
+            const isTrialCTA = textLower.includes('14-day trial') || textLower.includes('free trial') || textLower.includes('start free');
+            const isDemoCTA = textLower.includes('15-minute') || (textLower.includes('book') && textLower.includes('demo'));
+
+            if (isTrialCTA || isDemoCTA) {
+                const ctaType = isTrialCTA ? 'free_trial' : 'book_demo';
+
+                if (typeof (window as any).fbq !== 'undefined') {
+                    (window as any).fbq('track', 'InitiateCheckout', {
+                        content_name: isTrialCTA ? 'Free Trial from Toolkit' : 'Demo from Toolkit',
+                        content_category: 'dental_toolkit_cta',
+                        value: 16999,
+                        currency: 'INR'
+                    });
+                }
+                trackEvent(
+                    'ToolkitCTAClicked',
+                    {
+                        page: 'dental_toolkit',
+                        cta_type: ctaType,
+                        button_text: text,
+                        user_type: userSignals.userType,
+                        used_salary_calc: userSignals.usedSalaryCalc,
+                        used_invoice: userSignals.usedInvoiceTool,
+                        signal: 'direct_conversion_intent',
+                        value: 16999,
+                        currency: 'INR'
+                    },
+                    'toolkit_cta_clicked',
+                    {
+                        cta_type: ctaType,
+                        location: 'mid_page_strip',
+                        user_type: userSignals.userType,
+                        value: 16999
+                    }
+                );
+            }
+        };
+        document.addEventListener('click', midCtaHandler);
+
+        // ============================================================
+        // EVENT 11 — BOTTOM CTA: GET STARTED / CONTACT SALES
+        // ============================================================
+        const bottomCtaHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const text = (el.innerText || el.textContent || '').trim().toLowerCase();
+
+            if (text.includes('get started') || text.includes('contact sales')) {
+                trackEvent(
+                    'ToolkitBottomCTAClicked',
+                    {
+                        page: 'dental_toolkit',
+                        button: text,
+                        user_type: userSignals.userType,
+                        tools_used_count: [
+                            userSignals.usedSalaryCalc,
+                            userSignals.usedDentalChart,
+                            userSignals.usedInvoiceTool
+                        ].filter(Boolean).length
+                    },
+                    'bottom_cta_clicked',
+                    {
+                        button_text: text,
+                        page: 'dental_toolkit'
+                    }
+                );
+            }
+        };
+        document.addEventListener('click', bottomCtaHandler);
+
+        // ============================================================
+        // EVENT 12 — CROSS-TOOL NAVIGATION
+        // ============================================================
+        const crossToolNavHandler = function(e: Event) {
+            const el = e.target as HTMLElement;
+            const link = el.closest && el.closest('a');
+            if (!link) return;
+
+            const href = link.href || '';
+            const crossToolLinks = ['dental-invoice', 'break-even', 'profit-intelligence', 'dental-toolkit'];
+
+            crossToolLinks.forEach(function(tool) {
+                if (href.includes(tool)) {
+                    trackEvent(
+                        'ToolkitCrossToolNavigation',
+                        {
+                            page: 'dental_toolkit',
+                            navigating_to: href,
+                            signal: 'multi_tool_researcher',
+                            user_type: userSignals.userType
+                        },
+                        'cross_tool_navigation',
+                        {
+                            destination: href,
+                            source: 'dental_toolkit'
+                        }
+                    );
+                }
+            });
+        };
+        document.addEventListener('click', crossToolNavHandler);
+
+        // ============================================================
+        // EVENT 13 — VISITOR CLASSIFICATION ENGINE
+        // ============================================================
+        const classificationTimer = setTimeout(function() {
+            let finalType = userSignals.userType;
+
+            if (userSignals.enteredRevenue) {
+                finalType = 'confirmed_clinic_owner';
+            } else if (userSignals.usedInvoiceTool) {
+                finalType = 'likely_clinic_owner';
+            } else if (userSignals.usedSalaryCalc && !userSignals.enteredRevenue) {
+                finalType = 'practising_or_senior_student';
+            } else if (userSignals.usedDentalChart && !userSignals.usedSalaryCalc) {
+                finalType = 'dental_student';
+            }
+
+            if (finalType !== 'unknown') {
+                trackEvent(
+                    'ToolkitVisitorClassified',
+                    {
+                        page: 'dental_toolkit',
+                        visitor_type: finalType,
+                        used_salary_calc: userSignals.usedSalaryCalc,
+                        entered_revenue: userSignals.enteredRevenue,
+                        used_dental_chart: userSignals.usedDentalChart,
+                        used_invoice: userSignals.usedInvoiceTool,
+                        signal: 'classification_complete'
+                    },
+                    'visitor_classified',
+                    {
+                        visitor_type: finalType,
+                        page: 'dental_toolkit'
+                    }
+                );
+            }
+        }, 90000);
+
+        // ============================================================
+        // EVENT 14 — SCROLL DEPTH MILESTONES
+        // ============================================================
+        let scroll50Tracked = false;
+        let scroll85Tracked = false;
+
+        const scrollDepthHandler = function() {
+            const scrollPct = (window.scrollY + window.innerHeight) / document.body.scrollHeight * 100;
+
+            if (!scroll50Tracked && scrollPct >= 50) {
+                scroll50Tracked = true;
+                trackEvent(
+                    'ToolkitScrolled50',
+                    { page: 'dental_toolkit', depth: '50%', note: 'reached_salary_calculator_section' },
+                    'scroll_depth',
+                    { depth: 50, page: 'dental_toolkit' }
+                );
+            }
+
+            if (!scroll85Tracked && scrollPct >= 85) {
+                scroll85Tracked = true;
+                trackEvent(
+                    'ToolkitScrolled85',
+                    { page: 'dental_toolkit', depth: '85%', note: 'reached_faq_and_bottom_cta', user_type: userSignals.userType },
+                    'scroll_depth',
+                    { depth: 85, page: 'dental_toolkit' }
+                );
+            }
+        };
+        window.addEventListener('scroll', scrollDepthHandler);
+
         return () => {
              // Cleanup on unmount if needed
              document.head.removeChild(script1);
              document.head.removeChild(script2);
+             clearTimeout(engagementTimer);
+             clearTimeout(classificationTimer);
+             document.removeEventListener('click', tabClickHandler);
+             document.removeEventListener('click', invoiceLaunchHandler);
+             document.removeEventListener('click', chartModeHandler);
+             document.removeEventListener('click', toothClickHandler);
+             document.removeEventListener('input', revenueInputHandler);
+             document.removeEventListener('input', sliderInputHandler);
+             document.removeEventListener('click', shareResultHandler);
+             document.removeEventListener('click', shareToolHandler);
+             document.removeEventListener('click', faqOpenHandler);
+             document.removeEventListener('click', midCtaHandler);
+             document.removeEventListener('click', bottomCtaHandler);
+             document.removeEventListener('click', crossToolNavHandler);
+             window.removeEventListener('scroll', scrollDepthHandler);
         };
     }, []);
 
